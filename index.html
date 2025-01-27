@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kawaiify</title>
+	
+	<!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TFNX5VQT');
+    </script>
+    <!-- End Google Tag Manager -->
+	
     <style>
-        /* Styles globaux pour le corps et les éléments */
+        /* Dark mode */
         * {
             box-sizing: border-box;
         }
@@ -26,10 +37,10 @@
             display: flex;
             flex-direction: column;
             min-height: 100%;
-            padding-bottom: 50px; /* Laisse de la place pour le pied de page */
+            padding-bottom: 50px; /* Leave space for the footer */
         }
 
-        /* Bannière de profil */
+        /* Profile banner */
         .banner {
             background-color: #333;
             color: #fff;
@@ -52,7 +63,7 @@
         .banner h2 {
             font-size: 1.5em;
             margin: 0;
-            color: #FF69B4; /* Rose flashy pour le titre */
+            color: #FF69B4; /* Flashy pink for the title */
         }
 
         .banner p {
@@ -60,17 +71,17 @@
             margin-top: 5px;
         }
 
-        /* Grille pour les offres */
+        /* Grid for offers layout */
         .offers {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
-            justify-items: center; /* Centre les éléments dans la grille */
-            align-items: stretch; /* Assure que les éléments ont la même hauteur */
+            justify-items: center; /* Center the elements in the grid */
+            align-items: stretch; /* Ensure elements have the same height */
         }
 
-        /* Offre */
+        /* Offer */
         .offer {
             background-color: #1e1e1e;
             border: 1px solid #444;
@@ -82,23 +93,23 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 400px; /* Limite la largeur pour éviter de grands blocs sur PC */
-            height: 100%; /* Assure que toutes les sections ont la même hauteur */
+            max-width: 400px; /* Limit width to avoid large blocks on PC */
+            height: 100%; /* Ensure all sections have the same height */
         }
 
         .offer h2 {
-            color: #FF69B4; /* Rose flashy pour les titres */
+            color: #FF69B4; /* Flashy pink for the titles */
             font-size: 1.8em;
         }
-
-        .offer img {
+		
+		.offer img {
             width: 100%;
             max-height: 500px; /* Limite la hauteur de l'image */
             object-fit: cover; /* Adapte l'image sans la déformer */
             border-radius: 10px; /* Conserve les bords arrondis */
         }
-
-        /* Conteneur du carrousel */
+		
+        /* Carousel container */
         .carousel-container {
             position: relative;
             width: 100%;
@@ -126,7 +137,7 @@
             object-fit: cover; /* Proportions respectées */
         }
 
-        /* Styles des boutons */
+        /* Button styles */
         .button {
             display: inline-block;
             margin-top: 15px;
@@ -147,7 +158,7 @@
             border-color: #FF1493;
         }
 
-        /* Styles des champs de saisie d'email */
+        /* Email input styles */
         .email-input-container {
             position: relative;
             width: 100%;
@@ -214,8 +225,15 @@
     </style>
 </head>
 <body>
+	<!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFNX5VQT"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+	
     <div class="container">
-        <!-- Bannière de profil -->
+        <!-- Profile banner -->
         <div class="banner">
             <img src="https://i.ibb.co/pQNjck9/pfp.png" alt="Profile">
             <h2>Anime Kawaii Hub</h2>
@@ -223,13 +241,13 @@
             <p>Hope you enjoy my content! 🌸</p>
         </div>
 
-        <!-- Sections des offres -->
+        <!-- Offers sections -->
         <div class="offers">
-            <!-- Offre Patreon -->
+            <!-- Patreon Offer -->
             <div class="offer">
                 <h2>Unlock Uncensored Wallpapers 🔞</h2>
-                <p>For just <strong>$2</strong>, gain access to over 500 uncensored, high-quality anime wallpapers and exclusive content! 🥵</p>
-                <!-- Carrousel -->
+                <p>For just <strong>$2</strong>, gain access to over 100 uncensored, high-quality anime wallpapers and exclusive content! 🥵</p>
+                <!-- Carousel -->
                 <div class="carousel-container">
                     <div class="carousel-slide">
                         <img src="https://i.ibb.co/kKwyTLW/Image-1.png" alt="Image 1">
@@ -240,23 +258,23 @@
                     <div class="carousel-slide">
                         <img src="https://i.ibb.co/jkVzxWW/Image-4.png" alt="Image 3">
                     </div>
-                    <div class="carousel-slide">
+					<div class="carousel-slide">
                         <img src="https://i.ibb.co/ZSWFqp5/Image-7.png" alt="Image 4">
                     </div>
-                    <div class="carousel-slide">
+					<div class="carousel-slide">
                         <img src="https://i.ibb.co/9pgbqTH/Image-3.png" alt="Image 5">
                     </div>
-                    <div class="carousel-slide">
+					<div class="carousel-slide">
                         <img src="https://i.ibb.co/QvfQssX/Image-2.png" alt="Image 6">
                     </div>
                 </div>
                 <a href="https://www.patreon.com/c/Anime_NSFW" class="button">Get Exclusive Content</a>
             </div>
 
-            <!-- Offre Pack Gratuit -->
+            <!-- Free Pack Offer -->
             <div class="offer">
                 <h2>Download 100+ Free Wallpapers</h2>
-                <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>4K</strong> to enhance your device! 📲</p>
+                <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>HD</strong> to enhance your device! 📲</p>
                 <img src="https://i.ibb.co/QFLDWb4/wallpaper-2.png" alt="Free pack preview">
                 <div class="email-input-container">
                     <form action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
@@ -275,15 +293,15 @@
     </footer>
 
     <script>
-        // Fonctionnalité du carrousel
+        // Carousel functionality
         const slides = document.querySelectorAll('.carousel-slide');
         let currentIndex = 0;
 
         setInterval(() => {
-            slides[currentIndex].style.opacity = '0'; // Cacher l'image actuelle
-            currentIndex = (currentIndex + 1) % slides.length; // Passer à l'image suivante
-            slides[currentIndex].style.opacity = '1'; // Afficher l'image suivante
-        }, 3000); // Intervalle de 3 secondes
+            slides[currentIndex].style.opacity = '0'; // Hide current
+            currentIndex = (currentIndex + 1) % slides.length; // Move to next
+            slides[currentIndex].style.opacity = '1'; // Show next
+        }, 3000); // 3-second interval
     </script>
 </body>
 </html>
