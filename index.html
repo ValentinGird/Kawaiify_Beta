@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kawaiify</title>
-	
-	<!-- Google Analytics Tag -->
+    
+    <!-- Google Analytics Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-87691MFX3P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,7 +15,7 @@
       gtag('config', 'G-87691MFX3P');
     </script>
     <!-- End Google Analytics Tag -->
-	
+    
     <style>
         /* Dark mode */
         * {
@@ -102,14 +102,14 @@
             color: #FF69B4; /* Flashy pink for the titles */
             font-size: 1.8em;
         }
-		
-		.offer img {
+        
+        .offer img {
             width: 100%;
             max-height: 500px; /* Limite la hauteur de l'image */
             object-fit: cover; /* Adapte l'image sans la déformer */
             border-radius: 10px; /* Conserve les bords arrondis */
         }
-		
+        
         /* Carousel container */
         .carousel-container {
             position: relative;
@@ -230,9 +230,8 @@
         <!-- Profile banner -->
         <div class="banner">
             <img src="https://i.ibb.co/pQNjck9/pfp.png" alt="Profile">
-            <h2>Anime Kawaii Hub</h2>
-            <p>Hey! ✨ I'm Mia, an 18-year-old <strong>girl</strong> who loves <strong>spicy</strong> and <strong>kawaii</strong> anime wallpapers 🔥💖!</p>
-            <p>Hope you enjoy my content! 🌸</p>
+            <h2>Kawaiify</h2>
+            <p>Enjoy exclusive and free anime wallpapers!</p>
         </div>
 
         <!-- Offers sections -->
@@ -252,17 +251,17 @@
                     <div class="carousel-slide">
                         <img src="https://i.ibb.co/jkVzxWW/Image-4.png" alt="Image 3">
                     </div>
-					<div class="carousel-slide">
+                    <div class="carousel-slide">
                         <img src="https://i.ibb.co/ZSWFqp5/Image-7.png" alt="Image 4">
                     </div>
-					<div class="carousel-slide">
+                    <div class="carousel-slide">
                         <img src="https://i.ibb.co/9pgbqTH/Image-3.png" alt="Image 5">
                     </div>
-					<div class="carousel-slide">
+                    <div class="carousel-slide">
                         <img src="https://i.ibb.co/QvfQssX/Image-2.png" alt="Image 6">
                     </div>
                 </div>
-                <a href="https://www.patreon.com/c/Anime_NSFW" class="button">Get Exclusive Content</a>
+                <a href="https://www.patreon.com/c/Anime_NSFW" id="patreon-button" class="button">Get Exclusive Content</a>
             </div>
 
             <!-- Free Pack Offer -->
@@ -271,11 +270,10 @@
                 <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>HD</strong> to enhance your device! 📲</p>
                 <img src="https://i.ibb.co/QFLDWb4/wallpaper-2.png" alt="Free pack preview">
                 <div class="email-input-container">
-                    <form action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+                    <form id="email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
                         <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-                        <button type="submit" class="email-input-button">Claim Your Free Pack</button>
+                        <button type="submit" id="email-submit-button" class="email-input-button">Claim Your Free Pack</button>
                     </form>
-                    <p><small>You will receive your free pack directly in your inbox.</small></p>
                 </div>
             </div>
         </div>
@@ -286,6 +284,7 @@
         <p><small>Access to Patreon for just $2/month. Recurring subscription.</small></p>
     </footer>
 
+    <!-- Tracking Buttons and Forms -->
     <script>
         // Carousel functionality
         const slides = document.querySelectorAll('.carousel-slide');
@@ -296,6 +295,30 @@
             currentIndex = (currentIndex + 1) % slides.length; // Move to next
             slides[currentIndex].style.opacity = '1'; // Show next
         }, 3000); // 3-second interval
+
+        // Track Patreon Button Click
+        document.getElementById('patreon-button').addEventListener('click', function() {
+            gtag('event', 'click', {
+                'event_category': 'Buttons',
+                'event_label': 'Patreon Button',
+            });
+        });
+
+        // Track Email Submit Button Click
+        document.getElementById('email-submit-button').addEventListener('click', function() {
+            gtag('event', 'click', {
+                'event_category': 'Buttons',
+                'event_label': 'Email Submit Button',
+            });
+        });
+
+        // Track Email Form Submission
+        document.getElementById('email-form').addEventListener('submit', function() {
+            gtag('event', 'submit', {
+                'event_category': 'Form',
+                'event_label': 'Email Form Submit',
+            });
+        });
     </script>
 </body>
 </html>
