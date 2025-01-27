@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Wallpaper Hub</title>
+    <style>
+        /* Styles globaux pour le corps et les éléments */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            padding-bottom: 50px; /* Laisse de la place pour le pied de page */
+        }
+
+        /* Bannière de profil */
+        .banner {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .banner img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .banner h2 {
+            font-size: 1.5em;
+            margin: 0;
+            color: #FF69B4; /* Rose flashy pour le titre */
+        }
+
+        .banner p {
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        /* Grille pour les offres */
+        .offers {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center; /* Centre les éléments dans la grille */
+            align-items: stretch; /* Assure que les éléments ont la même hauteur */
+        }
+
+        /* Offre */
+        .offer {
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 400px; /* Limite la largeur pour éviter de grands blocs sur PC */
+            height: 100%; /* Assure que toutes les sections ont la même hauteur */
+        }
+
+        .offer h2 {
+            color: #FF69B4; /* Rose flashy pour les titres */
+            font-size: 1.8em;
+        }
+
+        .offer img {
+            width: 100%;
+            max-height: 500px; /* Limite la hauteur de l'image */
+            object-fit: cover; /* Adapte l'image sans la déformer */
+            border-radius: 10px; /* Conserve les bords arrondis */
+        }
+
+        /* Conteneur du carrousel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* La largeur du carousel reste fixe */
+            height: 500px; /* Hauteur plus grande */
+            overflow: hidden; /* Garde les images confinées */
+            border-radius: 10px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Effet de transition fluide */
+        }
+
+        .carousel-slide:nth-child(1) {
+            opacity: 1; /* La première image s'affiche par défaut */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Proportions respectées */
+        }
+
+        /* Styles des boutons */
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 15px 30px;
+            background-color: #FF69B4; /* Rose flashy pour le bouton */
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid #FF69B4;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            animation: pulse 1.5s infinite ease-in-out; /* Effet de pulsation */
+        }
+
+        .button:hover {
+            background-color: #FF1493; /* Rose plus foncé au survol */
+            border-color: #FF1493;
+        }
+
+        /* Styles des champs de saisie d'email */
+        .email-input-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 15px;
+            background-color: #2a2a2a; /* Gris clair pour le champ */
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        .email-input::placeholder {
+            color: #bbb; /* Placeholder gris plus clair */
+        }
+
+        .email-input:focus {
+            background-color: #444; /* Un peu plus sombre au focus */
+            outline: none;
+        }
+
+        .email-input-button {
+            background-color: #FF69B4; /* Bouton rose moderne */
+            padding: 15px;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .email-input-button:hover {
+            background-color: #FF1493; /* Bouton plus sombre au hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: #bbb;
+            padding: 10px;
+            margin-top: auto; /* Positionne le footer en bas */
+            text-align: center;
+        }
+
+        footer a {
+            color: #FF69B4; /* Rose pour les liens */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Bannière de profil -->
+        <div class="banner">
+            <img src="https://i.ibb.co/pQNjck9/pfp.png" alt="Profile">
+            <h2>Anime Kawaii Hub</h2>
+            <p>Hey! ✨ I'm Mia, an 18-year-old <strong>girl</strong> who loves <strong>spicy</strong> and <strong>kawaii</strong> 4K anime wallpapers 🔥💖!</p>
+            <p>Hope you enjoy my content! 🌸</p>
+        </div>
+
+        <!-- Sections des offres -->
+        <div class="offers">
+            <!-- Offre Patreon -->
+            <div class="offer">
+                <h2>Unlock Uncensored Wallpapers 🔞</h2>
+                <p>For just <strong>$2</strong>, gain access to over 500 uncensored, high-quality anime wallpapers and exclusive content! 🥵</p>
+                <!-- Carrousel -->
+                <div class="carousel-container">
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/kKwyTLW/Image-1.png" alt="Image 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/K5VHjdR/Image-5.png" alt="Image 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/jkVzxWW/Image-4.png" alt="Image 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/ZSWFqp5/Image-7.png" alt="Image 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/9pgbqTH/Image-3.png" alt="Image 5">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/QvfQssX/Image-2.png" alt="Image 6">
+                    </div>
+                </div>
+                <a href="https://www.patreon.com/c/Anime_NSFW" class="button">Get Exclusive Content</a>
+            </div>
+
+            <!-- Offre Pack Gratuit -->
+            <div class="offer">
+                <h2>Download 100+ Free Wallpapers</h2>
+                <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>4K</strong> to enhance your device! 📲</p>
+                <img src="https://i.ibb.co/QFLDWb4/wallpaper-2.png" alt="Free pack preview">
+                <div class="email-input-container">
+                    <form action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="email-input-button">Claim Your Free Pack</button>
+                    </form>
+                    <p><small>You will receive your free pack directly in your inbox.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 TonSite | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
+        <p><small>Access to Patreon for just $2/month. Recurring subscription.</small></p>
+    </footer>
+
+    <script>
+        // Fonctionnalité du carrousel
+        const slides = document.querySelectorAll('.carousel-slide');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            slides[currentIndex].style.opacity = '0'; // Cacher l'image actuelle
+            currentIndex = (currentIndex + 1) % slides.length; // Passer à l'image suivante
+            slides[currentIndex].style.opacity = '1'; // Afficher l'image suivante
+        }, 3000); // Intervalle de 3 secondes
+    </script>
+</body>
+</html>
