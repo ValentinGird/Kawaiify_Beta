@@ -28,6 +28,8 @@
         html, body {
             height: 100%;
             margin: 0;
+			display: flex;
+            flex-direction: column;
         }
 
         body {
@@ -35,12 +37,13 @@
             color: #e0e0e0;
             font-family: Arial, sans-serif;
             text-align: center;
+			flex-grow: 1;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            min-height: 100%;
+            flex-grow: 1;
             padding-bottom: 50px; /* Leave space for the footer */
         }
 
@@ -229,15 +232,6 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Profile banner -->
-        <div class="banner">
-            <img src="https://i.ibb.co/pQNjck9/pfp.png" alt="Profile">
-            <h2>Kawaiify</h2>
-            <p>Hey! I'm Mia, an 18-year-old <strong>girl</strong> who loves <strong>spicy</strong> and <strong>kawaii</strong> anime wallpapers 🔥💖!</p>
-            <p>Hope you enjoy my content! 🌸</p>
-        </div>
-
         <!-- Offers sections -->
         <div class="offers">
             <!-- Patreon Offer -->
