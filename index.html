@@ -732,6 +732,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     console.log("📊 Test event sent to Google Analytics ✅");
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("email-popup");
+    const emailSubmitted = localStorage.getItem("emailSubmitted");
+
+    if (!emailSubmitted) {
+        setTimeout(() => {
+            popup.style.display = "block";
+        }, 5000); // ✅ Affiche après 5 secondes
+    }
+
+    window.closePopup = function () {
+        popup.style.display = "none";
+    };
+
+    const popupEmailForm = document.getElementById("popup-email-form");
+    popupEmailForm.addEventListener("submit", function () {
+        localStorage.setItem("emailSubmitted", "true");
+    });
+});
+
 	</script>
 </body>
 </html>
