@@ -696,7 +696,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // ✅ Track les clics sur les boutons Patreon
+    document.body.addEventListener("click", function (event) {
+        let button = event.target.closest(".patreon-track");
+        if (button) {
+            gtag("event", "click", {
+                event_category: "Buttons",
+                event_label: "Patreon Click",
+                value: 1
+            });
+            console.log("📊 Patreon click tracked! ✅"); // ✅ Debug
+        }
+    });
 
+    // ✅ Track les soumissions d'email (form principal + popup)
+    document.querySelectorAll("#email-form, #popup-email-form").forEach(form => {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // 🚨 Empêche la soumission immédiate pour capturer l'event
+            gtag("event", "sign_up", {
+                event_category: "Forms",
+                event_label: "Email Submission",
+                value: 1
+            });
+            console.log("📊 Email submission tracked! ✅"); // ✅ Debug
+            form.submit(); // ✅ Envoie le formulaire après tracking
+        });
+    });
+
+    // ✅ Vérifie si Google Analytics fonctionne avec un test event
+    gtag('event', 'test_event', {
+        event_category: 'Debug',
+        event_label: 'Test Event',
+        value: 1
+    });
+    console.log("📊 Test event sent to Google Analytics ✅");
+});
 
 
 	</script>
