@@ -313,7 +313,7 @@
     <div class="container">
         <div class="image-box">
             <h2>{TITLE}</h2>
-            <img src="{IMAGE_URL}" alt="Wallpaper">
+            <img src="{IMAGE_URL}" alt="Wallpaper" id="firstImageToDownload">
             <a href="{DOWNLOAD_URL}" download class="button">Download in HD</a>
         </div>
     </div>
@@ -337,6 +337,22 @@
         <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
     </footer>
     <script>
+	document.addEventListener("DOMContentLoaded", function () {
+        // Cibler l'image de la première image à télécharger
+        const imageToDownload = document.getElementById("firstImageToDownload");
+
+        if (imageToDownload) {
+            const imageUrl = imageToDownload.src;
+
+            // Créer un lien de téléchargement temporaire
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = imageUrl.split("/").pop(); // Télécharge l'image avec son nom d'origine
+            document.body.appendChild(a);
+            a.click(); // Déclenche le téléchargement
+            document.body.removeChild(a); // Retire l'élément après l'action
+        }
+    });
         document.addEventListener("DOMContentLoaded", function () {
             let gallery = document.getElementById("gallery");
             let imageUrls = [];
