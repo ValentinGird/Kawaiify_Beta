@@ -697,6 +697,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("📊 Google Analytics Debug: Tracking initialized ✅");
+
+    // ✅ Vérifie si gtag est bien défini avant d'envoyer des événements
+    if (typeof gtag !== "function") {
+        console.error("❌ Google Analytics (gtag) n'est pas défini !");
+        return;
+    }
+
     // ✅ Track les clics sur les boutons Patreon
     document.body.addEventListener("click", function (event) {
         let button = event.target.closest(".patreon-track");
@@ -706,34 +714,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 event_label: "Patreon Click",
                 value: 1
             });
-            console.log("📊 Patreon click tracked! ✅"); // ✅ Debug
+            console.log("📊 Patreon click tracked! ✅");
         }
     });
 
     // ✅ Track les soumissions d'email (form principal + popup)
     document.querySelectorAll("#email-form, #popup-email-form").forEach(form => {
         form.addEventListener("submit", function (event) {
-            event.preventDefault(); // 🚨 Empêche la soumission immédiate pour capturer l'event
+            event.preventDefault();
             gtag("event", "sign_up", {
                 event_category: "Forms",
                 event_label: "Email Submission",
                 value: 1
             });
-            console.log("📊 Email submission tracked! ✅"); // ✅ Debug
-            form.submit(); // ✅ Envoie le formulaire après tracking
+            console.log("📊 Email submission tracked! ✅");
+            form.submit();
         });
     });
 
-    // ✅ Vérifie si Google Analytics fonctionne avec un test event
-    gtag('event', 'test_event', {
-        event_category: 'Debug',
-        event_label: 'Test Event',
+    // ✅ Test event pour vérifier si Google Analytics fonctionne
+    gtag("event", "test_event", {
+        event_category: "Debug",
+        event_label: "Test Event",
         value: 1
     });
     console.log("📊 Test event sent to Google Analytics ✅");
 });
-
-
 	</script>
 </body>
 </html>
