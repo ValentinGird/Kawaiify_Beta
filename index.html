@@ -15,7 +15,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-87691MFX3P');
+      gtag('config', 'G-87691MFX3P', { 'debug_mode': true });
     </script>
     <!-- End Google Analytics Tag -->
     
@@ -500,7 +500,27 @@
 
 <script>
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.patreon-track').forEach(button => {
+        button.addEventListener("click", function () {
+            gtag("event", "click", {
+                event_category: "Buttons",
+                event_label: "Patreon",
+                value: 1
+            });
+        });
+    });
 
+    document.querySelectorAll("#email-submit-button, .popup-button").forEach(button => {
+        button.addEventListener("click", function () {
+            gtag("event", "sign_up", {
+                event_category: "Forms",
+                event_label: "Email Submission",
+                value: 1
+            });
+        });
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     const lazyImages = document.querySelectorAll("img[loading='lazy']");
