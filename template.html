@@ -339,22 +339,28 @@
     <script>
 	
     document.addEventListener("DOMContentLoaded", function () {
-        // Cibler le bouton de téléchargement
-        const downloadButton = document.getElementById("downloadButton");
-        const imageUrl = "{IMAGE_URL}"; // Remplace avec l'URL de l'image
+    // Cibler le bouton de téléchargement
+    const downloadButton = document.getElementById("downloadButton");
+    const imageUrl = "{IMAGE_URL}"; // Remplace avec l'URL de l'image
 
-        // Ajouter un événement au clic sur le bouton
-        downloadButton.addEventListener("click", function (e) {
-            e.preventDefault();  // Empêcher le comportement par défaut du lien
-            const a = document.createElement('a');
-            a.href = imageUrl;  // Lien de l'image à télécharger
-            a.download = imageUrl.split("/").pop(); // Téléchargement avec le nom de l'image
-            a.style.display = "none";  // Cache l'élément <a>
-            document.body.appendChild(a); // Ajoute l'élément à la page
-            a.click();  // Simule un clic sur le lien
-            document.body.removeChild(a);  // Retire l'élément après le clic
-        });
+    // Ajouter un événement au clic sur le bouton
+    downloadButton.addEventListener("click", function (e) {
+        e.preventDefault();  // Empêcher le comportement par défaut du lien
+        
+        // Utiliser fetch pour récupérer l'image
+        fetch(imageUrl)
+            .then(response => response.blob())  // Convertir l'image en blob
+            .then(blob => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob); // Créer une URL pour l'image blob
+                a.download = imageUrl.split("/").pop(); // Téléchargement avec le nom de l'image
+                document.body.appendChild(a);
+                a.click();  // Simule un clic sur le lien
+                document.body.removeChild(a);  // Retire l'élément après le clic
+            })
+            .catch(error => console.error("Erreur lors du téléchargement :", error));
     });
+});
 
 	
         document.addEventListener("DOMContentLoaded", function () {
