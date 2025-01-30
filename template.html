@@ -31,6 +31,9 @@
             text-align: center;
             margin-bottom: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+			display: flex;
+			flex-direction: column; /* ✅ Pour que les éléments s'empilent verticalement */
+			align-items: center; /* ✅ Centre les éléments horizontalement */
         }
         .image-box img {
 			width: 100%;
@@ -51,6 +54,11 @@
             text-align: center;
             text-decoration: none;
             font-weight: bold;
+			width: 100%; /* ✅ Permet d'aligner la largeur du bouton avec l'image */
+			max-width: 400px; /* ✅ Empêche que le bouton devienne trop large */
+			border: none; /* ✅ Supprime toute bordure grise */
+			box-shadow: none; /* ✅ Supprime toute ombre */
+			outline: none; /* ✅ Supprime le contour au focus */
         }
         .button:hover {
             background-color: #FF1493;
@@ -92,11 +100,25 @@
                         let div = document.createElement("div");
                         div.className = "image-box";
                         div.innerHTML = `<img src="${imgUrl}" alt="Wallpaper">
-                                         <a href="${imgUrl}" download class="button">Download in HD</a>`;
+						<button class="button" onclick="downloadImage('${imgUrl}')">Download in HD</button>`;
                         gallery.appendChild(div);
                     });
                 });
         });
+		
+		function downloadImage(url) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = url.split("/").pop(); // Prend juste le nom du fichier
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(error => console.error("Erreur lors du téléchargement :", error));
+}
     </script>
 </body>
 </html>
