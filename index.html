@@ -445,10 +445,31 @@
 			text-align: center;
 			margin-top: 10px;
 		}
-
+		
+		.logo-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			padding: 10px 0; /* Espace au-dessus et en dessous */
+			margin-top: 20px; /* ✅ Ajoute de l’espace au-dessus */
+		}
+		
+		.logo-container img {
+			width: 90%;  /* ✅ Adapte la largeur au mobile sans dépasser */
+			max-width: 200px; /* ✅ Ne dépasse pas cette largeur sur PC */
+			height: auto; /* ✅ Garde les proportions */
+			object-fit: contain;
+		}
+		
     </style>
 </head>
 <body>
+		<div class="logo-container">
+		<a href="https://kawaiify.art">
+        <img src="https://i.ibb.co/rfGqdvc6/Logo-test.png" alt="Kawaiify Logo">
+		</a>
+		</div>
 		<div class="progress-container">
 			<div class="progress-bar" id="progressBar"></div>
 		</div>
