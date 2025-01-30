@@ -86,6 +86,8 @@
             padding: 20px;
             justify-items: center; /* Center the elements in the grid */
             align-items: stretch; /* Ensure elements have the same height */
+			margin-bottom: 0px; /* Réduction maximale sans être collé */
+			padding-bottom: 0px !important; /* Supprime tout padding en bas */
         }
 
         /* Offer */
@@ -102,6 +104,7 @@
             width: 100%;
             max-width: 400px; /* Limit width to avoid large blocks on PC */
             height: 100%; /* Ensure all sections have the same height */
+			margin-bottom: 10px; /* Réduction de l’espace en dessous */
         }
 
         .offer h2 {
@@ -154,6 +157,7 @@
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+			
             text-align: center;
             border: 2px solid #FF69B4;
             transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
@@ -172,6 +176,8 @@
             width: 100%;
             max-width: 300px;
             margin-top: 20px;
+			margin-bottom: 0px; /* Moins d’espace après le champ email */
+			padding-bottom: 0px !important;
         }
 
         .email-input {
@@ -230,6 +236,104 @@
         footer a:hover {
             text-decoration: underline;
         }
+		
+		/* ✅ Réduit l’espace entre les images de la galerie et les autres sections */
+		.gallery {
+			display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center; /* Center the elements in the grid */
+            align-items: stretch; /* Ensure elements have the same height */
+			margin-bottom: 0px; /* Réduction maximale sans être collé */
+			margin-top: 0px !important;
+        }
+
+		/* ✅ Ajustement de l’espacement entre chaque image du scroll infini */
+		.gallery-offer {
+			background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 400px; /* Limit width to avoid large blocks on PC */
+            height: 100%; /* Ensure all sections have the same height */
+			margin-bottom: 10px; /* Réduction de l’espace en dessous */
+        }
+
+		/* ✅ Réduction de l’espace sous les images */
+		.gallery-offer img {
+			width: 100%;
+            max-height: 500px; /* Limite la hauteur de l'image */
+            object-fit: cover; /* Adapte l'image sans la déformer */
+            border-radius: 10px; /* Conserve les bords arrondis */
+        }
+
+		/* ✅ Réduction de l’espace entre les boutons et l’image */
+		.gallery-offer .button-container {
+			display: flex;
+			justify-content: center;
+			gap: 8px; /* Moins d’espace entre les boutons */
+			margin-top: 10px; /* Moins d’espace entre l’image et les boutons */
+			width: 100%;
+		}
+
+		/* ✅ Ajustement du footer pour qu’il ne remonte pas trop */
+		footer {
+			width: 100%;
+			background-color: #333;
+			color: #bbb;
+			padding: 15px;
+			text-align: center;
+			position: relative;
+			margin-top: 30px; /* Un peu d’espace, mais pas trop */
+		}
+		
+		.section-title {
+			font-size: 24px;
+			font-weight: bold;
+			color: #FF69B4; /* Couleur flashy rose */
+			text-align: center;
+			margin-top: 30px;
+			margin-bottom: 10px;
+		}
+		
+		.gallery-description {
+			font-size: 14px;
+			color: #bbb;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+		
+		.gallery-description {
+			font-size: 16px; /* Augmentation de la taille */
+			font-weight: bold; /* Texte en gras */
+			color: #ffffff; /* Rose plus clair */
+			text-align: center;
+			margin-bottom: 20px;
+			background: rgba(255, 105, 180, 0.1); /* Légère couleur de fond */
+			padding: 10px;
+			border-radius: 0px;
+			display: inline-block;
+		}
+		
+		.patreon-description {
+			font-size: 14px;
+			color: #ffffff; /* Blanc pour une meilleure lisibilité */
+			text-align: center;
+			margin-top: 8px;
+			opacity: 0.8; /* Légèrement atténué */
+			max-width: 80%; /* ✅ Limite la largeur pour qu'elle reste sous le bouton */
+			margin-left: auto;
+			margin-right: auto;
+			word-wrap: break-word; /* ✅ Évite que le texte dépasse */
+		}
+
     </style>
 </head>
 <body>
@@ -277,47 +381,120 @@
             </div>
         </div>
     </div>
+	
+	<h2 class="section-title">Latest <span style="color:#FF69B4;">CENSORED</span> Wallpaper</h2>
+<p class="gallery-description">💎 Unlock <strong>the uncensored version in 4K</strong> on Patreon!</p>
 
-    <footer>
-        <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
-        <p><small>Access to Patreon for just $2/month. Recurring subscription.</small></p>
-    </footer>
+<div class="gallery" id="gallery"></div>
 
-    <!-- Tracking Buttons and Forms -->
-    <script>
-        // Carousel functionality
-        const slides = document.querySelectorAll('.carousel-slide');
-        let currentIndex = 0;
+<footer>
+    <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
+    <p><small>Access to Patreon for just $2/month. Recurring subscription.</small></p>
+</footer>
 
-        setInterval(() => {
-            slides[currentIndex].style.opacity = '0'; // Hide current
-            currentIndex = (currentIndex + 1) % slides.length; // Move to next
-            slides[currentIndex].style.opacity = '1'; // Show next
-        }, 3000); // 3-second interval
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let isLoading = false;
+    let loadedImages = new Set();
+    const imagesPerLoad = 1;
+    const gallery = document.getElementById('gallery');
+    let imageUrls = [];
 
-        // Track Patreon Button Click
-        document.getElementById('patreon-button').addEventListener('click', function() {
-            gtag('event', 'click', {
-                'event_category': 'Buttons',
-                'event_label': 'Patreon Button',
+    async function fetchImages() {
+        if (isLoading) return;
+        isLoading = true;
+
+        try {
+            if (imageUrls.length === 0) {
+                const response = await fetch('https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json');
+                if (!response.ok) throw new Error("Error fetching image JSON");
+
+                const data = await response.json();
+                imageUrls = data.images;
+
+                if (!imageUrls || imageUrls.length === 0) {
+                    console.warn("No images found!");
+                    return;
+                }
+            }
+
+            for (let i = 0; i < imagesPerLoad; i++) {
+                if (loadedImages.size >= imageUrls.length) {
+                    window.removeEventListener('scroll', handleScroll);
+                    return;
+                }
+
+                const imgUrl = imageUrls[loadedImages.size];
+
+                if (loadedImages.has(imgUrl)) {
+                    continue;
+                }
+
+                loadedImages.add(imgUrl);
+
+                const offerDiv = document.createElement('div');
+                offerDiv.className = 'offer gallery-offer';
+
+                const imgElement = document.createElement('img');
+                imgElement.src = imgUrl;
+                imgElement.alt = '4K Wallpaper';
+                imgElement.loading = "lazy";
+
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+
+                // ✅ Bouton Patreon avec tracking
+                const patreonButton = document.createElement('a');
+                patreonButton.href = 'https://www.patreon.com/c/Anime_NSFW';
+                patreonButton.className = 'button patreon-track';
+                patreonButton.innerHTML = '<strong>Get UNCENSORED on Patreon 🔥</strong>';
+                patreonButton.setAttribute("data-image", imgUrl); // Associe l'URL de l'image pour tracking
+
+                // ✅ Description sous le bouton
+                const patreonDescription = document.createElement('p');
+                patreonDescription.className = 'patreon-description';
+                patreonDescription.innerHTML = '💎 Get the <strong>CENSORED & UNCENSORED</strong> versions in <strong>4K</strong> downloadable on Patreon!';
+
+                buttonContainer.appendChild(patreonButton);
+                offerDiv.appendChild(imgElement);
+                offerDiv.appendChild(buttonContainer);
+                offerDiv.appendChild(patreonDescription);
+                gallery.appendChild(offerDiv);
+
+                console.log(`📸 Image ajoutée: ${imgUrl}`);
+            }
+
+        } catch (error) {
+            console.error("Error loading image:", error);
+        }
+
+        isLoading = false;
+    }
+
+    function handleScroll() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+            fetchImages();
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    fetchImages();
+
+    // ✅ Google Analytics Tracking pour le bouton Patreon
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("patreon-track")) {
+            let imageClicked = event.target.getAttribute("data-image"); // Récupère l'image associée
+            console.log("🔥 Patreon button clicked for:", imageClicked);
+
+            // Envoie l'event à Google Analytics
+            gtag("event", "patreon_click", {
+                event_category: "Buttons",
+                event_label: imageClicked, // Identifie quelle image a déclenché le clic
             });
-        });
+        }
+    });
+});
 
-        // Track Email Submit Button Click
-        document.getElementById('email-submit-button').addEventListener('click', function() {
-            gtag('event', 'click', {
-                'event_category': 'Buttons',
-                'event_label': 'Email Submit Button',
-            });
-        });
-
-        // Track Email Form Submission
-        document.getElementById('email-form').addEventListener('submit', function() {
-            gtag('event', 'submit', {
-                'event_category': 'Form',
-                'event_label': 'Email Form Submit',
-            });
-        });
-    </script>
+	</script>
 </body>
 </html>
