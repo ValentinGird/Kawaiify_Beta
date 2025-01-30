@@ -333,10 +333,99 @@
 			margin-right: auto;
 			word-wrap: break-word; /* ✅ Évite que le texte dépasse */
 		}
+		
+		/* ✅ Style du popup */
+		.popup-container {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 300px;
+			background-color: #1e1e1e;
+			color: #ffffff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+			text-align: center;
+			z-index: 9999;
+			display: none; /* Caché au départ */
+		}
+
+		/* ✅ Titre du popup */
+		.popup-container h3 {
+			margin: 0;
+			font-size: 18px;
+			color: #FF69B4; /* Rose flashy */
+		}
+
+		/* ✅ Texte du popup */
+		.popup-container p {
+			font-size: 14px;
+			margin: 10px 0;
+			opacity: 0.9;
+		}
+
+		/* ✅ Champ email */
+		.popup-email-input {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: none;
+			border-radius: 6px;
+			text-align: center;
+			ont-size: 14px;
+			background-color: #2a2a2a;
+			color: white;
+		}
+
+		/* ✅ Bouton du popup */
+		.popup-container .popup-button {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #FF69B4;
+			color: white;
+			border-radius: 6px;
+			font-size: 14px;
+			cursor: pointer;
+			text-align: center;
+			border: none;
+			transition: background-color 0.3s ease;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+			.popup-container .popup-button:hover {
+			background-color: #FF1493;
+		}
+
+		/* ✅ Bouton de fermeture */
+		.popup-close {
+			position: absolute;
+			top: 8px;
+			right: 12px;
+			font-size: 16px;
+			cursor: pointer;
+			color: #ffffff;
+			opacity: 0.7;
+		}
+
+		.popup-close:hover {
+			opacity: 1;
+		}
 
     </style>
 </head>
 <body>
+		<!-- ✅ POPUP FORMULAIRE EMAIL -->
+		<div class="popup-container" id="email-popup">
+			<span class="popup-close" onclick="closePopup()">✖</span>
+				<h3>🎁 Get 100+ Free 4K Wallpapers!</h3>
+				<p>Enter your email to receive the pack instantly!</p>
+    
+				<form id="popup-email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+				<input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
+				<button type="submit" class="popup-button">Claim Your Pack</button>
+			</form>
+		</div>
         <!-- Offers sections -->
         <div class="offers">
             <!-- Patreon Offer -->
@@ -393,6 +482,30 @@
 </footer>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Vérifie si l'utilisateur a déjà soumis son email
+    const emailSubmitted = localStorage.getItem("emailSubmitted");
+    const popup = document.getElementById("email-popup");
+
+    if (!emailSubmitted) {
+        setTimeout(() => {
+            popup.style.display = "block";
+        }, 5000); // ✅ Affiche le popup après 5 secondes
+    }
+
+    // ✅ Fermer le popup
+    window.closePopup = function () {
+        popup.style.display = "none";
+    };
+
+    // ✅ Gérer la soumission du formulaire pour ne plus afficher le popup
+    const popupEmailForm = document.getElementById("popup-email-form");
+    popupEmailForm.addEventListener("submit", function () {
+        localStorage.setItem("emailSubmitted", "true"); // ✅ Enregistre que l'utilisateur a soumis l'email
+    });
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let isLoading = false;
     let loadedImages = new Set();
