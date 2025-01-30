@@ -323,10 +323,10 @@
 		}
 		
 		.patreon-description {
-			font-size: 14px;
+			font-size: 13px;
 			color: #ffffff; /* Blanc pour une meilleure lisibilité */
 			text-align: center;
-			margin-top: 8px;
+			margin-top: 20px;
 			opacity: 0.8; /* Légèrement atténué */
 			max-width: 80%; /* ✅ Limite la largeur pour qu'elle reste sous le bouton */
 			margin-left: auto;
@@ -411,21 +411,65 @@
 		.popup-close:hover {
 			opacity: 1;
 		}
+		
+		/* ✅ Barre de progression */
+		.progress-container {
+			width: 100%;
+			height: 5px;
+			background: #444;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+
+		.progress-bar {
+			height: 5px;
+			background: #FF69B4;
+			width: 0%;
+			transition: width 0.2s ease;
+		}
+		
+		.counter-text {
+			font-size: 14px;
+			color: #fff;
+			text-align: center;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+		
+		.info-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			margin-top: 10px;
+		}
 
     </style>
 </head>
 <body>
+		<div class="progress-container">
+			<div class="progress-bar" id="progressBar"></div>
+		</div>
+		
 		<!-- ✅ POPUP FORMULAIRE EMAIL -->
 		<div class="popup-container" id="email-popup">
 			<span class="popup-close" onclick="closePopup()">✖</span>
-				<h3>🎁 Get 100+ Free 4K Wallpapers!</h3>
-				<p>Enter your email to receive the pack instantly!</p>
     
-				<form id="popup-email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
-				<input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
-				<button type="submit" class="popup-button">Claim Your Pack</button>
-			</form>
-		</div>
+			<h3>🎁 Get 100+ Free 4K Wallpapers!</h3>
+    
+			<p class="popup-description">
+				🌸 Featuring <strong>beautiful anime girls</strong>, stylish aesthetics & stunning artwork.<br>
+				📥 Download your exclusive pack <strong>for free</strong> now!
+			</p>
+
+			<form id="popup-email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+			<input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
+			<button type="submit" class="popup-button">Claim Your Pack</button>
+		</form>
+</div>
+		
         <!-- Offers sections -->
         <div class="offers">
             <!-- Patreon Offer -->
@@ -453,11 +497,11 @@
                         <img src="https://i.ibb.co/QvfQssX/Image-2.png" alt="Image 6">
                     </div>
                 </div>
-                <a href="https://www.patreon.com/c/Anime_NSFW" id="patreon-button" class="button"><strong>Get Exclusive Content</strong></a>
+                <a href="https://www.patreon.com/c/Anime_NSFW" id="patreon-button" class="button"><strong>🔞 Unlock Uncensored Version</strong></a>
             </div>
 
             <!-- Free Pack Offer -->
-            <div class="offer">
+            <div class="offer" id="free-offer-section">
                 <h2>Download 100+ Free Wallpapers</h2>
                 <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>4K</strong> to enhance your device! 📲</p>
                 <img src="https://i.ibb.co/FmT37qd/Banner-Patreon-Website-V2.png" alt="Free pack preview">
@@ -482,15 +526,56 @@
 </footer>
 
 <script>
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Vérifie si l'utilisateur a déjà soumis son email
-    const emailSubmitted = localStorage.getItem("emailSubmitted");
+    const lazyImages = document.querySelectorAll("img[loading='lazy']");
+
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src; // Remplace l'attribut data-src par src
+                    observer.unobserve(img);
+                }
+            });
+        },
+        { rootMargin: "100px" } // Déclenche un peu avant l'affichage
+    );
+
+    lazyImages.forEach((img) => {
+        observer.observe(img);
+    });
+});
+
+document.addEventListener("scroll", function () {
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById("progressBar").style.width = progress + "%";
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("email-popup");
+    const freeOfferSection = document.getElementById("free-offer-section");
+    const emailSubmitted = localStorage.getItem("emailSubmitted");
+    let hasTriggeredPopup = false; // Pour éviter que le popup ne s'affiche plusieurs fois
 
     if (!emailSubmitted) {
-        setTimeout(() => {
-            popup.style.display = "block";
-        }, 5000); // ✅ Affiche le popup après 5 secondes
+        // ✅ Vérifie si l'utilisateur dépasse l'offre gratuite
+        window.addEventListener("scroll", function () {
+            const offerPosition = freeOfferSection.getBoundingClientRect().top + window.scrollY;
+            const scrollPosition = window.scrollY + window.innerHeight;
+
+            if (scrollPosition > offerPosition + freeOfferSection.offsetHeight && !hasTriggeredPopup) {
+                hasTriggeredPopup = true; // Marque que le popup a été déclenché
+                setTimeout(() => {
+                    popup.style.display = "block";
+                }, 3000); // ✅ Timer de 3 secondes avant affichage
+            }
+        });
     }
 
     // ✅ Fermer le popup
@@ -498,10 +583,10 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.style.display = "none";
     };
 
-    // ✅ Gérer la soumission du formulaire pour ne plus afficher le popup
+    // ✅ Enregistrer que l'utilisateur a soumis son email
     const popupEmailForm = document.getElementById("popup-email-form");
     popupEmailForm.addEventListener("submit", function () {
-        localStorage.setItem("emailSubmitted", "true"); // ✅ Enregistre que l'utilisateur a soumis l'email
+        localStorage.setItem("emailSubmitted", "true");
     });
 });
 
@@ -510,7 +595,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let isLoading = false;
     let loadedImages = new Set();
     const imagesPerLoad = 1;
-    const gallery = document.getElementById('gallery');
+    const gallery = document.getElementById("gallery");
     let imageUrls = [];
 
     async function fetchImages() {
@@ -520,19 +605,20 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             if (imageUrls.length === 0) {
                 const response = await fetch('https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json');
-                if (!response.ok) throw new Error("Error fetching image JSON");
+                if (!response.ok) throw new Error("❌ Problème de récupération du fichier JSON");
 
                 const data = await response.json();
                 imageUrls = data.images;
 
                 if (!imageUrls || imageUrls.length === 0) {
-                    console.warn("No images found!");
+                    console.warn("⚠️ Aucune image trouvée !");
                     return;
                 }
             }
 
             for (let i = 0; i < imagesPerLoad; i++) {
                 if (loadedImages.size >= imageUrls.length) {
+                    console.log("✅ Toutes les images ont été chargées.");
                     window.removeEventListener('scroll', handleScroll);
                     return;
                 }
@@ -553,32 +639,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 imgElement.alt = '4K Wallpaper';
                 imgElement.loading = "lazy";
 
-                const buttonContainer = document.createElement('div');
-                buttonContainer.className = 'button-container';
+                // ✅ Récupérer ou attribuer un nombre de clics aléatoire entre 100 et 500
+                let storedCount = localStorage.getItem(`clickCount_${imgUrl}`);
+                if (storedCount === null) {
+                    storedCount = Math.floor(Math.random() * (500 - 100 + 1)) + 100; // 🔥 Entre 100 et 500
+                    localStorage.setItem(`clickCount_${imgUrl}`, storedCount);
+                }
+
+                // ✅ Compteur de clics par image 🔥
+                const downloadCounter = document.createElement('p');
+                downloadCounter.className = 'counter-text';
+                downloadCounter.innerHTML = `🔥 ${storedCount} people checked out this wallpaper!`;
 
                 // ✅ Bouton Patreon avec tracking
                 const patreonButton = document.createElement('a');
                 patreonButton.href = 'https://www.patreon.com/c/Anime_NSFW';
                 patreonButton.className = 'button patreon-track';
                 patreonButton.innerHTML = '<strong>Get UNCENSORED on Patreon 🔥</strong>';
-                patreonButton.setAttribute("data-image", imgUrl); // Associe l'URL de l'image pour tracking
+                patreonButton.setAttribute("data-image", imgUrl);
 
                 // ✅ Description sous le bouton
                 const patreonDescription = document.createElement('p');
                 patreonDescription.className = 'patreon-description';
                 patreonDescription.innerHTML = '💎 Get the <strong>CENSORED & UNCENSORED</strong> versions in <strong>4K</strong> downloadable on Patreon!';
 
-                buttonContainer.appendChild(patreonButton);
+                // ✅ Ajout des éléments dans le bon ordre
                 offerDiv.appendChild(imgElement);
-                offerDiv.appendChild(buttonContainer);
+                offerDiv.appendChild(downloadCounter); // ✅ Compteur sous l’image
+                offerDiv.appendChild(patreonButton);
                 offerDiv.appendChild(patreonDescription);
                 gallery.appendChild(offerDiv);
 
-                console.log(`📸 Image ajoutée: ${imgUrl}`);
+                // ✅ Ajout de l'événement de tracking par image
+                patreonButton.addEventListener("click", function () {
+                    updateDownloadCounter(imgUrl, downloadCounter);
+                });
             }
 
         } catch (error) {
-            console.error("Error loading image:", error);
+            console.error("❌ Erreur lors du chargement de l'image :", error);
         }
 
         isLoading = false;
@@ -593,20 +692,19 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', handleScroll);
     fetchImages();
 
-    // ✅ Google Analytics Tracking pour le bouton Patreon
-    document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("patreon-track")) {
-            let imageClicked = event.target.getAttribute("data-image"); // Récupère l'image associée
-            console.log("🔥 Patreon button clicked for:", imageClicked);
+    // ✅ Fonction pour mettre à jour le compteur PAR IMAGE
+    function updateDownloadCounter(imageUrl, counterElement) {
+        let currentCount = localStorage.getItem(`clickCount_${imageUrl}`) || 0;
+        currentCount = parseInt(currentCount) + 1;
+        localStorage.setItem(`clickCount_${imageUrl}`, currentCount);
 
-            // Envoie l'event à Google Analytics
-            gtag("event", "patreon_click", {
-                event_category: "Buttons",
-                event_label: imageClicked, // Identifie quelle image a déclenché le clic
-            });
-        }
-    });
+        // ✅ Mise à jour du compteur pour CETTE image seulement
+        counterElement.innerHTML = `🔥 ${currentCount} people checked out this wallpaper!`;
+    }
 });
+
+
+
 
 	</script>
 </body>
