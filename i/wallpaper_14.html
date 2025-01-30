@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Best Waifu Wallpaper for Phone</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/XZJbQPYm/favicon-32x32.png">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 15px 30px;
+            background-color: #FF69B4;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #FF1493;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        footer {
+            background-color: #333;
+            color: #bbb;
+            padding: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        footer a {
+            color: #FF69B4;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💖 Best Waifu Wallpaper for Phone</h1>
+        <img src="https://i.ibb.co/20bxyTfK/promptchan-image-20.jpg" alt="Wallpaper">
+        <p>A beautiful anime artwork that brings elegance and charm to your device. Available in full HD resolution! 🌸 💖</p>
+        <a href="https://i.ibb.co/20bxyTfK/promptchan-image-20.jpg" class="button">Download in HD</a>
+    </div>
+
+    <h2 class="section-title">Latest Wallpapers</h2>
+    <div class="gallery" id="gallery"></div>
+
+    <footer>
+        <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json')
+                .then(response => response.json())
+                .then(data => {
+                    const gallery = document.getElementById("gallery");
+                    data.images.slice(0, 10).forEach(imgUrl => {
+                        const img = document.createElement("img");
+                        img.src = imgUrl;
+                        gallery.appendChild(img);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
