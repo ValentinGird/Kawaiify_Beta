@@ -26,18 +26,20 @@
 			
         }
         .image-box {
-            background-color: #1e1e1e;
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 20px;
-            width: 89%;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+			background-color: #1e1e1e;
+			border: 1px solid #444;
+			border-radius: 10px;
+			padding: 20px;
+			width: 89%;  /* ✅ Même largeur que les autres sections */
+			max-width: 350px; /* ✅ Empêche qu'il soit trop large sur PC */
+			text-align: center;
+			margin: 0 auto; /* ✅ Centre parfaitement */
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 			display: flex;
-			flex-direction: column; /* ✅ Pour que les éléments s'empilent verticalement */
-			align-items: center; /* ✅ Centre les éléments horizontalement */
+			flex-direction: column;
+			align-items: center;
         }
+		
         .image-box img {
 			width: 100%;
             max-height: 500px; /* Limite la hauteur de l'image */
@@ -92,7 +94,195 @@
 			height: auto; /* ✅ Garde les proportions */
 			object-fit: contain;
 		}
+		footer {
+            background-color: #333;
+            color: #bbb;
+            padding: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        footer a {
+            color: #FF69B4;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
 		
+		/* ✅ Free Pack Offer - Alignement parfait */
+		.offer {
+			background-color: #1e1e1e;
+			border: 1px solid #444;
+			border-radius: 10px;
+			padding: 20px;
+			width: 89%;  /* ✅ Aligné avec les autres sections */
+			max-width: 350px; /* ✅ Même taille que les images de la galerie */
+			text-align: center;
+			margin: 0 auto; /* ✅ Centre parfaitement */
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		/* ✅ Titre */
+		.offer h2 {
+			color: #FF69B4;
+			font-size: 1.5em;
+			margin-bottom: 10px;
+		}
+
+		/* ✅ Texte */
+		.offer p {
+			font-size: 0.9em;
+			color: #e0e0e0;
+			margin-bottom: 15px;
+		}
+
+		/* ✅ Image pack */
+		.offer img {
+			width: 100%;
+			height: auto;
+			max-height: 500px; /* ✅ Ajusté pour la galerie */
+			object-fit: cover;
+			border-radius: 10px;
+			margin-bottom: 10px;
+		}
+
+		/* ✅ Conteneur du formulaire */
+			email-input-container {
+			width: 100%;
+			max-width: 260px;
+			display: flex;
+			flex-direction: column;
+			align-items: center; /* ✅ Centre les éléments */
+			gap: 12px; /* ✅ Ajoute de l'espace entre les éléments */
+		}
+
+		/* ✅ Champ email */
+			.email-input {
+			width: 93%;
+			padding: 12px;
+			background-color: #2a2a2a;
+			border: none;
+			border-radius: 6px;
+			color: #fff;
+			font-size: 14px;
+			text-align: center;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+			transition: background-color 0.3s ease;
+		}
+
+		.email-input::placeholder {
+			color: #bbb;
+		}
+
+		.email-input:focus {
+			background-color: #444;
+			outline: none;
+		}
+
+		/* ✅ Bouton */
+		.email-input-button {
+			background-color: #FF69B4;
+			padding: 12px;
+			border: none;
+			width: 100%;
+			font-size: 14px;
+			color: #fff;
+			border-radius: 6px;
+			cursor: pointer;
+			text-align: center;
+			transition: background-color 0.3s ease;
+		}
+
+		/* ✅ Ajout d'un espace supplémentaire entre le champ email et le bouton */
+		.email-input-button {
+			margin-top: 5px; /* ✅ Petit espace pour éviter qu'ils ne se touchent */
+		}
+
+		.email-input-button:hover {
+			background-color: #FF1493;
+		}
+		
+		/* ✅ Style du popup */
+		.popup-container {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 300px;
+			background-color: #1e1e1e;
+			color: #ffffff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+			text-align: center;
+			z-index: 9999;
+			display: none; /* Caché par défaut */
+		}
+
+		/* ✅ Titre du popup */
+		.popup-container h3 {
+			margin: 0;
+			font-size: 18px;
+			color: #FF69B4; /* Rose flashy */
+		}
+
+		/* ✅ Texte du popup */
+		.popup-container p {
+			font-size: 14px;
+			margin: 10px 0;
+			opacity: 0.9;
+		}
+
+		/* ✅ Champ email */
+		.popup-email-input {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: none;
+			border-radius: 6px;
+			text-align: center;
+			font-size: 14px;
+			background-color: #2a2a2a;
+			color: white;
+		}
+
+		/* ✅ Bouton du popup */
+		.popup-container .popup-button {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #FF69B4;
+			color: white;
+			border-radius: 6px;
+			font-size: 14px;
+			cursor: pointer;
+			text-align: center;
+			border: none;
+			transition: background-color 0.3s ease;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		.popup-container .popup-button:hover {
+			background-color: #FF1493;
+		}
+
+		/* ✅ Bouton de fermeture */
+		.popup-close {
+			position: absolute;
+			top: 8px;
+			right: 12px;
+			font-size: 16px;
+			cursor: pointer;
+			color: #ffffff;
+			opacity: 0.7;
+		}
+
+		.popup-close:hover {
+			opacity: 1;
+		}
+
     </style>
 </head>
 <body>
@@ -101,6 +291,25 @@
         <img src="https://i.ibb.co/rfGqdvc6/Logo-test.png" alt="Kawaiify Logo">
 		</a>
 	</div>
+	
+	<!-- ✅ Popup Email -->
+	<div class="popup-container" id="email-popup">
+		<span class="popup-close" onclick="closePopup()">✖</span>
+
+		<h3>🎁 Get 100+ Free 4K Wallpapers!</h3>
+
+		<p class="popup-description">
+        🌸 Featuring <strong>beautiful anime girls</strong>, stylish aesthetics & stunning artwork.<br>
+        📥 Download your exclusive pack <strong>for free</strong> now!
+		</p>
+
+		<form id="popup-email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+			<input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
+			<button type="submit" class="popup-button">Claim Your Pack</button>
+		</form>
+	</div>
+
+	
     <div class="container">
         <div class="image-box">
             <h2>{TITLE}</h2>
@@ -108,6 +317,20 @@
             <a href="{DOWNLOAD_URL}" download class="button">Download in HD</a>
         </div>
     </div>
+	
+	<!-- Free Pack Offer -->
+<div class="offer" id="free-offer-section">
+    <h2>Download 100+ Free Wallpapers</h2>
+    <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>4K</strong> to enhance your device! 📲</p>
+    <img src="https://i.ibb.co/FmT37qd/Banner-Patreon-Website-V2.png" alt="Free pack preview">
+    <div class="email-input-container">
+        <form id="email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+            <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+            <button type="submit" id="email-submit-button" class="email-input-button">Claim Your Free Pack</button>
+        </form>
+    </div>
+</div>
+	
     <h2 class="section-title">Latest Wallpapers</h2>
     <div class="gallery" id="gallery"></div>
     <footer>
@@ -144,6 +367,27 @@
         })
         .catch(error => console.error("Erreur lors du téléchargement :", error));
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("email-popup");
+    const emailSubmitted = localStorage.getItem("emailSubmitted");
+
+    if (!emailSubmitted) {
+        setTimeout(() => {
+            popup.style.display = "block";
+        }, 5000); // ✅ Affiche après 5 secondes
+    }
+
+    window.closePopup = function () {
+        popup.style.display = "none";
+    };
+
+    const popupEmailForm = document.getElementById("popup-email-form");
+    popupEmailForm.addEventListener("submit", function () {
+        localStorage.setItem("emailSubmitted", "true");
+    });
+});
+
     </script>
 </body>
 </html>
