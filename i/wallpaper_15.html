@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😍 Stunning Kawaii Anime Wallpaper HD</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+			
+        }
+        .image-box {
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 20px;
+            width: 89%;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .image-box img {
+			width: 100%;
+            max-height: 500px; /* Limite la hauteur de l'image */
+            object-fit: cover; /* Adapte l'image sans la déformer */
+            border-radius: 10px; /* Conserve les bords arrondis */
+		}
+
+        .button {
+            display: block;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #FF69B4;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #FF1493;
+        }
+        .gallery {
+			display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center; /* Center the elements in the grid */
+            align-items: stretch; /* Ensure elements have the same height */
+			margin-bottom: 0px; /* Réduction maximale sans être collé */
+			margin-top: 0px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-box">
+            <h2>😍 Stunning Kawaii Anime Wallpaper HD</h2>
+            <img src="https://i.ibb.co/rGFtsVCw/promptchan-image-21.jpg" alt="Wallpaper">
+            <a href="https://i.ibb.co/rGFtsVCw/promptchan-image-21.jpg" download class="button">Download in HD</a>
+        </div>
+    </div>
+    <h2 class="section-title">Latest Wallpapers</h2>
+    <div class="gallery" id="gallery"></div>
+    <footer>
+        <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let gallery = document.getElementById("gallery");
+            let imageUrls = [];
+            fetch('https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json')
+                .then(response => response.json())
+                .then(data => {
+                    imageUrls = data.images.filter(url => url !== "https://i.ibb.co/rGFtsVCw/promptchan-image-21.jpg");
+                    imageUrls.forEach(imgUrl => {
+                        let div = document.createElement("div");
+                        div.className = "image-box";
+                        div.innerHTML = `<img src="${imgUrl}" alt="Wallpaper">
+                                         <a href="${imgUrl}" download class="button">Download in HD</a>`;
+                        gallery.appendChild(div);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
