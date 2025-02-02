@@ -1033,7 +1033,17 @@
             });
             
             
-            
+            document.addEventListener("DOMContentLoaded", function () {
+    const emailInput = document.querySelector(".popup-email-input"); // Sélectionne l'input email
+
+    if (emailInput) {
+        emailInput.addEventListener("focus", function () {
+            setTimeout(() => {
+                emailInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            }, 300); // Petit délai pour éviter les bugs de transition
+        });
+    }
+});
             
             
             
