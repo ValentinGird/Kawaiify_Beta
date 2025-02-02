@@ -529,62 +529,100 @@
             background-color: #FF1493; /* Rose plus foncé */
             transform: scale(1.1);
             }
-            /* ✅ Style de la barre de recherche */
+            /* ✅ Conteneur de la barre de recherche */
 .search-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
+/* ✅ Barre de recherche */
 .search-bar {
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
     padding: 12px;
+    font-size: 16px;
     border: 2px solid #FF69B4;
     border-radius: 8px;
-    font-size: 16px;
-    background-color: #2a2a2a;
+    background-color: #1e1e1e;
     color: white;
-    outline: none;
-    transition: border 0.3s ease;
+    text-align: center;
+}
+/* ✅ Style du titre */
+.image-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF69B4; /* Rose flashy */
+    margin: 10px 0;
 }
 
-.search-bar::placeholder {
+/* ✅ Style de la description */
+.image-description {
+    font-size: 14px;
     color: #bbb;
+    margin: 5px 0;
+    text-align: center;
+    padding: 0 10px;
 }
 
-.search-bar:focus {
-    border-color: #FF1493;
+/* ✅ Conteneur des tags */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
 }
 
 /* ✅ Style des tags */
-.image-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    margin-top: 8px;
-}
-
 .tag {
     background-color: #FF69B4;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
+/* ✅ Style des tags */
+.tag {
+    background-color: #FF69B4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer; /* ✅ Rend le tag cliquable */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* ✅ Effet au survol */
 .tag:hover {
     background-color: #FF1493;
+}
+
+/* ✅ Effet quand un tag est actif (cliqué) */
+.tag.active {
+    background-color: #FF1493;
+    border: 2px solid white;
+}
+
+
+/* ✅ Ajuste la position du contenu sous la barre */
+body {
+    padding-top: 80px; /* Ajuste selon la hauteur de la barre */
 }
 
         </style>
     </head>
     <body>
-
-
         <!-- ✅ Bouton de retour en haut -->
         <button id="scrollTopButton" class="scroll-top-button">⬆</button>
         <div class="logo-container">
@@ -592,11 +630,6 @@
             <img src="https://i.ibb.co/rfGqdvc6/Logo-test.png" alt="Kawaiify Logo">
             </a>
         </div>
-
-        <!-- ✅ Barre de recherche -->
-<div class="search-container">
-    <input type="text" id="search-bar" class="search-bar" placeholder="🔍 Search wallpapers...">
-</div>
         <!-- ✅ Popup 4K Centered -->
         <div class="popup-overlay" id="popup-4k-overlay">
             <div class="popup-container" id="popup-4k">
@@ -645,11 +678,54 @@
         </div>
         <h2 class="section-title">Latest Wallpapers</h2>
         <p class="gallery-description">💎 Unlock all the high-definition <strong>wallpapers</strong> and upgrade your screen for free!</p>
+
+<!-- ✅ Barre de recherche -->
+<div class="search-container">
+    <input type="text" id="searchBar" class="search-bar" placeholder="🔍 Search wallpapers...">
+</div>
+
+
         <div class="gallery" id="gallery"></div>
         <footer>
             <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
         </footer>
         <script>
+
+            // ✅ Fonction pour filtrer les images
+function filterImages() {
+    console.log("🔎 Filtrage en cours...");
+    const searchInput = document.getElementById("searchBar").value.toLowerCase().trim();
+    const galleryItems = document.querySelectorAll(".gallery-offer");
+
+    galleryItems.forEach(item => {
+        const title = item.querySelector(".image-title") ? item.querySelector(".image-title").textContent.toLowerCase() : "";
+        const tags = Array.from(item.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase());
+
+        // ✅ Vérifie si le titre ou un tag correspond à la recherche
+        if (title.includes(searchInput) || tags.some(tag => tag.includes(searchInput))) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+
+    console.log("✅ Filtrage terminé !");
+}
+
+// ✅ Fonction pour filtrer les images en cliquant sur un tag
+function filterByTag(tag) {
+    console.log(`🔎 Filtrage par tag: ${tag}`);
+
+    const searchBar = document.getElementById("searchBar"); // Récupère la barre de recherche
+    if (!searchBar) {
+        console.error("❌ ERREUR: La barre de recherche est introuvable !");
+        return;
+    }
+
+    searchBar.value = tag; // ✅ Met à jour la barre de recherche avec le tag sélectionné
+    filterImages(); // ✅ Lance immédiatement le filtrage après ajout du tag
+}
+
             document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll('.patreon-track').forEach(button => {
                     button.addEventListener("click", function () {
@@ -694,232 +770,245 @@
             });
             
             document.addEventListener("DOMContentLoaded", function () {
-    let isLoading = false;
-    const imagesPerLoad = 10;
-    let loadedImages = new Set();
-    const gallery = document.getElementById("gallery");
-    let imageUrls = [];
-    let nextImageIndex = 0;
+            let isLoading = false;
+            const imagesPerLoad = 10;
+            let loadedImages = new Set();
+            const gallery = document.getElementById("gallery");
+            let imageUrls = [];
+            let nextImageIndex = 0;
+            
+            // ✅ Vérifie si l'utilisateur a déjà soumis son email
+            function hasSubmittedEmail() {
+            return localStorage.getItem("emailSubmitted") === "true";
+            }
+            
+            // ✅ Sauvegarde l'état après soumission du formulaire
+            function setEmailSubmitted() {
+            localStorage.setItem("emailSubmitted", "true");
+            }
+            
+            // ✅ Sélectionne le bouton "Download in HD (No email)" dans le popup
+            let downloadHdPopupButton = document.getElementById("download-hd-button");
+            
+            // ✅ Met à jour le bouton "Download in HD (No email)" pour télécharger la bonne image
+            function setPopupDownloadUrl(imageUrlHD, imageUrl4K) {
+    if (downloadHdPopupButton) {
+        // ✅ Remplace le bouton pour éviter les anciens écouteurs
+        const newDownloadButton = downloadHdPopupButton.cloneNode(true);
+        downloadHdPopupButton.replaceWith(newDownloadButton);
+        downloadHdPopupButton = newDownloadButton;
 
-    // ✅ Sélectionne la barre de recherche
-    const searchBar = document.getElementById("search-bar");
-
-    // ✅ Vérifie si l'utilisateur a déjà soumis son email
-    function hasSubmittedEmail() {
-        return localStorage.getItem("emailSubmitted") === "true";
+        // ✅ Télécharge la version HD (et pas 4K !)
+        downloadHdPopupButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            forceDownload(imageUrlHD); // 🔥 On force le téléchargement HD
+            closePopup4K();
+        });
     }
+}
 
-    // ✅ Sauvegarde l'état après soumission du formulaire
-    function setEmailSubmitted() {
-        localStorage.setItem("emailSubmitted", "true");
-    }
-
-    // ✅ Sélectionne le bouton "Download in HD (No email)" dans le popup
-    let downloadHdPopupButton = document.getElementById("download-hd-button");
-
-    // ✅ Met à jour le bouton "Download in HD (No email)" pour télécharger la bonne image
-    function setPopupDownloadUrl(imageUrl) {
-        if (downloadHdPopupButton) {
-            const newDownloadButton = downloadHdPopupButton.cloneNode(true);
-            downloadHdPopupButton.replaceWith(newDownloadButton);
-            downloadHdPopupButton = newDownloadButton;
-
-            // ✅ Ajoute un seul événement de clic
-            downloadHdPopupButton.addEventListener("click", function (event) {
-                event.preventDefault();
-                forceDownload(imageUrl);
-                closePopup4K();
-            });
-        }
-    }
-
-    // ✅ Forcer le téléchargement direct de l'image
-    async function forceDownload(imageUrl) {
-        try {
+            
+            // ✅ Forcer le téléchargement direct de l'image
+            async function forceDownload(imageUrl) {
+            try {
             const response = await fetch(imageUrl);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
-
+            
             const a = document.createElement("a");
             a.href = blobUrl;
-            a.download = "wallpaper_4k.jpg";
+            a.download = "wallpaper.jpg";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-
+            
             setTimeout(() => {
                 window.URL.revokeObjectURL(blobUrl);
             }, 1000);
-        } catch (error) {
+            } catch (error) {
             console.error("❌ Erreur lors du téléchargement de l’image :", error);
-        }
-    }
+            }
+            }
+            
 
-    // ✅ Fonction pour charger les images
-    async function fetchImages() {
-        if (isLoading || nextImageIndex >= imageUrls.length) return;
-        isLoading = true;
+// ✅ Fonction pour charger les images avec tags cliquables
+async function fetchImages() {
+    if (isLoading || nextImageIndex >= imageUrls.length) return;
+    isLoading = true;
 
-        try {
-            const imagesToLoad = imageUrls.slice(nextImageIndex, nextImageIndex + imagesPerLoad);
-            nextImageIndex += imagesPerLoad;
+    try {
+        const imagesToLoad = imageUrls.slice(nextImageIndex, nextImageIndex + imagesPerLoad);
+        nextImageIndex += imagesPerLoad;
 
-            imagesToLoad.forEach(imageData => {
-                if (!loadedImages.has(imageData.url)) {
-                    loadedImages.add(imageData.url);
+        imagesToLoad.forEach(imgData => {
+            if (!loadedImages.has(imgData.url)) {
+                loadedImages.add(imgData.url);
 
-                    const offerDiv = document.createElement("div");
-                    offerDiv.className = "offer gallery-offer";
+                const offerDiv = document.createElement("div");
+                offerDiv.className = "offer gallery-offer";
 
-                    const imgElement = document.createElement("img");
-                    imgElement.src = imageData.url;
-                    imgElement.alt = imageData.title;
-                    imgElement.loading = "lazy";
+                // ✅ Image
+                const imgElement = document.createElement("img");
+                imgElement.src = imgData.url;
+                imgElement.alt = imgData.title;
+                imgElement.loading = "lazy";
 
-                    // ✅ Ajout du titre
-                    const titleElement = document.createElement("h3");
-                    titleElement.className = "image-title";
-                    titleElement.textContent = imageData.title;
+                // ✅ Titre
+                const titleElement = document.createElement("h3");
+                titleElement.className = "image-title";
+                titleElement.textContent = imgData.title;
 
-                    // ✅ Ajout de la description
-                    const descElement = document.createElement("p");
-                    descElement.className = "image-description";
-                    descElement.textContent = imageData.description;
+                // ✅ Description
+                const descriptionElement = document.createElement("p");
+                descriptionElement.className = "image-description";
+                descriptionElement.textContent = imgData.description;
 
-                    // ✅ Ajout des tags pour le référencement
-                    const tagsContainer = document.createElement("div");
-                    tagsContainer.className = "image-tags";
-                    imageData.tags.forEach(tag => {
-                        const tagSpan = document.createElement("span");
-                        tagSpan.className = "tag";
-                        tagSpan.textContent = `#${tag}`;
-                        tagSpan.addEventListener("click", function () {
-                            searchBar.value = tag;
-                            filterImages();
-                        });
-                        tagsContainer.appendChild(tagSpan);
-                    });
+                // ✅ Génération des tags cliquables
+const tagsContainer = document.createElement("div");
+tagsContainer.className = "tags-container";
+imgData.tags.forEach(tag => {
+    const tagSpan = document.createElement("span");
+    tagSpan.className = "tag";
+    tagSpan.textContent = tag;
 
-                    // ✅ Bouton "Download in HD" (Gris)
-                    const downloadButton = document.createElement("button");
-                    downloadButton.className = "download-button download-button-hd";
-                    downloadButton.innerHTML = "<strong>Download in HD</strong>";
-                    downloadButton.addEventListener("click", function () {
-                        forceDownload(imageData.url);
-                    });
+    // ✅ Quand on clique sur un tag, on filtre par ce tag
+    tagSpan.addEventListener("click", function () {
+        filterByTag(tag);
+    });
 
-                    // ✅ Bouton "Download in 4K (Free)" (Rose mis en avant)
-                    const download4KButton = document.createElement("button");
-                    download4KButton.className = "download-button download-button-4k";
-                    download4KButton.innerHTML = "<strong>Download in 4K (Free)</strong>";
-                    download4KButton.addEventListener("click", function () {
-                        openPopup4K(imageData.url_4k);
-                    });
+    tagsContainer.appendChild(tagSpan);
+});
 
-                    offerDiv.appendChild(imgElement);
-                    offerDiv.appendChild(titleElement);
-                    offerDiv.appendChild(descElement);
-                    offerDiv.appendChild(tagsContainer);
-                    offerDiv.appendChild(downloadButton);
-                    offerDiv.appendChild(download4KButton);
-                    gallery.appendChild(offerDiv);
+                // ✅ Compteur de téléchargements
+                let storedCount = localStorage.getItem(`clickCount_${imgData.url}`);
+                if (storedCount === null) {
+                    storedCount = Math.floor(Math.random() * (15000 - 900 + 1)) + 900;
+                    localStorage.setItem(`clickCount_${imgData.url}`, storedCount);
                 }
-            });
-        } catch (error) {
-            console.error("❌ Erreur lors du chargement des images :", error);
-        }
 
-        isLoading = false;
+                const downloadCounter = document.createElement("p");
+                downloadCounter.className = "counter-text";
+                downloadCounter.innerHTML = `🔥 Downloaded by ${storedCount.toLocaleString()} people!`;
+
+
+                // ✅ Bouton HD
+                const downloadButtonHD = document.createElement("button");
+                downloadButtonHD.className = "download-button download-button-hd";
+                downloadButtonHD.innerHTML = "<strong>Download in HD</strong>";
+                downloadButtonHD.addEventListener("click", function () {
+                    forceDownload(imgData.url);
+                });
+
+                // ✅ Bouton 4K (popup)
+                const download4KButtonPopup = document.createElement("button");
+                download4KButtonPopup.className = "download-button download-button-4k";
+                download4KButtonPopup.innerHTML = "<strong>Download in 4K (Free)</strong>";
+                download4KButtonPopup.addEventListener("click", function () {
+    openPopup4K(imgData.url, imgData.url_4k); // 🔥 On passe les 2 URL : HD et 4K
+});
+
+                // ✅ Ajout des éléments
+                offerDiv.appendChild(imgElement);
+                offerDiv.appendChild(titleElement);
+                offerDiv.appendChild(descriptionElement);
+                offerDiv.appendChild(tagsContainer);
+                offerDiv.appendChild(downloadCounter);
+                offerDiv.appendChild(downloadButtonHD);
+                offerDiv.appendChild(download4KButtonPopup);
+
+                gallery.appendChild(offerDiv);
+            }
+        });
+    } catch (error) {
+        console.error("❌ Erreur lors du chargement des images :", error);
     }
 
-    // ✅ Fonction pour charger les images initiales
-    async function loadInitialImages() {
-        try {
-            const response = await fetch("https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json");
-            if (!response.ok) throw new Error("❌ Problème de récupération du fichier JSON");
+    isLoading = false;
+}
 
+
+
+
+
+            
+            // ✅ Fonction pour charger les images initiales
+            async function loadInitialImages() {
+            try {
+            const response = await fetch("https://raw.githubusercontent.com/ValentinGird/Kawaiify_Beta/main/images.json");
+            if (!response.ok) throw new Error("❌ Problème de récupération du fichier JSON");
+            
             const data = await response.json();
             imageUrls = data.images;
-
+            
             if (!imageUrls || imageUrls.length === 0) {
                 console.warn("⚠️ Aucune image trouvée !");
                 return;
             }
-
+            
             fetchImages();
-        } catch (error) {
+            } catch (error) {
             console.error("❌ Erreur lors de la récupération du fichier JSON :", error);
-        }
-    }
-
-    loadInitialImages();
-
-    // ✅ Fonction de recherche
-    function filterImages() {
-        const searchQuery = searchBar.value.toLowerCase();
-        const allImages = document.querySelectorAll(".gallery-offer");
-
-        allImages.forEach(imageContainer => {
-            const title = imageContainer.querySelector(".image-title").textContent.toLowerCase();
-            const description = imageContainer.querySelector(".image-description").textContent.toLowerCase();
-            const tags = Array.from(imageContainer.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase());
-
-            if (title.includes(searchQuery) || description.includes(searchQuery) || tags.some(tag => tag.includes(searchQuery))) {
-                imageContainer.style.display = "block";
-            } else {
-                imageContainer.style.display = "none";
             }
-        });
-    }
-
-    // ✅ Écouteur d'événement pour la recherche
-    searchBar.addEventListener("input", filterImages);
-
-    // ✅ Chargement infini sur scroll
-    window.addEventListener("scroll", function () {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+            }
+            
+            loadInitialImages();
+            
+            // ✅ Chargement infini sur scroll
+            window.addEventListener("scroll", function () {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
             fetchImages();
-        }
-    });
-
-    // ✅ Fonction pour ouvrir le popup 4K ou télécharger directement
-    function openPopup4K(imageUrl4K) {
-        if (hasSubmittedEmail()) {
-            forceDownload(imageUrl4K);
-        } else {
-            const popup = document.getElementById("popup-4k");
-            const overlay = document.getElementById("popup-4k-overlay");
-
-            if (popup && overlay) {
-                popup.style.display = "block";
-                overlay.style.display = "flex";
-                setPopupDownloadUrl(imageUrl4K);
-                document.body.style.overflow = "hidden";
             }
-        }
-    }
-
-    // ✅ Fonction pour fermer le popup 4K et réactiver le scrolling
-    function closePopup4K() {
+            });
+            
+            // ✅ Fonction pour ouvrir le popup 4K ou télécharger directement
+            function openPopup4K(imageUrlHD, imageUrl4K) {
+    if (hasSubmittedEmail()) {
+        forceDownload(imageUrl4K); // ✅ Si déjà inscrit, on télécharge directement en 4K
+    } else {
         const popup = document.getElementById("popup-4k");
         const overlay = document.getElementById("popup-4k-overlay");
 
         if (popup && overlay) {
-            popup.style.display = "none";
-            overlay.style.display = "none";
-            document.body.style.overflow = "";
+            popup.style.display = "block";
+            overlay.style.display = "flex";
+
+            setPopupDownloadUrl(imageUrlHD, imageUrl4K); // ✅ Passe les 2 URL
+            document.body.style.overflow = "hidden";
         }
     }
-
-    // ✅ Capture la soumission du formulaire pour masquer définitivement le popup
-    document.getElementById("popup-4k-form").addEventListener("submit", function () {
-        setEmailSubmitted();
-        closePopup4K();
-    });
-
-});
-
-
+}
+            
+            // ✅ Fonction pour fermer le popup 4K et réactiver le scrolling
+            function closePopup4K() {
+            const popup = document.getElementById("popup-4k");
+            const overlay = document.getElementById("popup-4k-overlay");
+            
+            if (popup && overlay) {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+            
+            document.body.style.overflow = "";
+            }
+            }
+            
+            // ✅ Capture la soumission du formulaire pour masquer définitivement le popup
+            document.getElementById("popup-4k-form").addEventListener("submit", function () {
+            setEmailSubmitted(); // ✅ Marque l'email comme soumis
+            closePopup4K(); // ✅ Ferme le popup après soumission
+            });
+            
+            // ✅ Ferme le popup si on clique sur l'overlay
+            document.getElementById("popup-4k-overlay").addEventListener("click", function (event) {
+            if (event.target === this) {
+            closePopup4K();
+            }
+            });
+            
+            // ✅ Ferme le popup quand on clique sur la croix (✖)
+            document.querySelector(".popup-close").addEventListener("click", function () {
+            closePopup4K();
+            });
+            });
             
             
             
@@ -947,9 +1036,58 @@
             });
             });
             
-            
-            
-            
+
+            function filterByTag(tag) {
+    console.log(`🔎 Filtrage par tag: ${tag}`);
+
+    const searchBar = document.getElementById("searchBar"); // Récupère la barre de recherche
+    if (!searchBar) {
+        console.error("❌ ERREUR: La barre de recherche est introuvable !");
+        return;
+    }
+
+    searchBar.value = tag; // ✅ Met à jour la barre de recherche avec le tag sélectionné
+    filterImages(); // ✅ Appelle la fonction de filtrage
+}
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ Barre de recherche activée...");
+
+    const searchBar = document.getElementById("searchBar");
+    const gallery = document.getElementById("gallery");
+
+    if (!searchBar || !gallery) {
+        console.error("❌ ERREUR: Élément introuvable !");
+        return;
+    }
+
+    function filterImages() {
+    console.log("🔎 Filtrage en cours...");
+    const searchInput = document.getElementById("searchBar").value.toLowerCase().trim();
+    const galleryItems = document.querySelectorAll(".gallery-offer");
+
+    galleryItems.forEach(item => {
+        const title = item.querySelector(".image-title") ? item.querySelector(".image-title").textContent.toLowerCase() : "";
+        const tags = Array.from(item.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase());
+
+        // ✅ Vérifie si le titre ou un tag correspond à la recherche
+        if (title.includes(searchInput) || tags.some(tag => tag.includes(searchInput))) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+
+    console.log("✅ Filtrage terminé !");
+}
+
+
+
+    searchBar.addEventListener("input", filterImages);
+});
+         
+
             
             
             document.addEventListener("DOMContentLoaded", function () {
