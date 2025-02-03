@@ -1,18 +1,81 @@
 {
     "images": [
         {
+            "url": "https://i.ibb.co/YT3dZpqM/wallpaper-337.jpg",
+            "url_4k": "https://i.ibb.co/5x2YkZy5/wallpaper-337.jpg",
+            "title": "Anime Wallpaper",
+            "description": "A stunning 4K anime wallpaper.",
+            "tags": [
+                "anime",
+                "4k",
+                "hd"
+            ]
+        },
+        {
+            "url": "https://i.ibb.co/SXg6fnQk/wallpaper-335.jpg",
+            "url_4k": "https://i.ibb.co/wNp6JsWq/wallpaper-335.jpg",
+            "title": "Anime Wallpaper",
+            "description": "A stunning 4K anime wallpaper.",
+            "tags": [
+                "anime",
+                "4k",
+                "hd"
+            ]
+        },
+        {
+            "url": "https://i.ibb.co/HTQqShm5/wallpaper-37.jpg",
+            "url_4k": "https://i.ibb.co/nsqM92dn/wallpaper-37.jpg",
+            "title": "Anime Wallpaper",
+            "description": "A stunning 4K anime wallpaper.",
+            "tags": [
+                "anime",
+                "4k",
+                "hd"
+            ]
+        },
+        {
+            "url": "https://i.ibb.co/wZYNr4Rv/wallpaper-43.jpg",
+            "url_4k": "https://i.ibb.co/bMLp4ZTM/wallpaper-43.jpg",
+            "title": "Wallpaper with detected objects",
+            "description": "An image containing: 1",
+            "tags": [
+                "1"
+            ]
+        },
+        {
+            "url": "https://i.ibb.co/PGJySMDZ/wallpaper-338.jpg",
+            "url_4k": "https://i.ibb.co/Wp0B51mW/wallpaper-338.jpg",
+            "title": "Anime Wallpaper",
+            "description": "A beautiful 4K anime wallpaper.",
+            "tags": [
+                "anime",
+                "4k",
+                "hd"
+            ]
+        },
+        {
             "url": "https://i.ibb.co/zTCMsZTv/wallpaper-297.jpg",
             "url_4k": "https://i.ibb.co/v68w9DXg/wallpaper-296.jpg",
             "title": "Epic Sunset Anime",
             "description": "A stunning anime-style sunset wallpaper.",
-            "tags": ["sunset", "anime", "4k", "landscape"]
+            "tags": [
+                "sunset",
+                "anime",
+                "4k",
+                "landscape"
+            ]
         },
         {
             "url": "https://i.ibb.co/Z6rsSf9V/wallpaper-286.jpg",
             "url_4k": "https://i.ibb.co/RT5b4fKL/wallpaper-273.jpg",
             "title": "Cyberpunk City",
             "description": "A neon-lit cyberpunk cityscape.",
-            "tags": ["cyberpunk", "neon", "futuristic", "anime"]
+            "tags": [
+                "cyberpunk",
+                "neon",
+                "futuristic",
+                "anime"
+            ]
         }
     ]
 }
