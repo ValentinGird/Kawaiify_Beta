@@ -659,7 +659,7 @@
       <!-- ✅ Section de l'image principale -->
       <div class="image-box">
          <h2>Anime Wallpaper</h2>
-         <img src="https://i.ibb.co/SXg6fnQk/wallpaper-335.jpg" alt="Wallpaper">
+         <img src="https://i.ibb.co/tTBKVFzn/wallpaper-335.jpg" alt="Wallpaper">
          <!-- ✅ Ajout de la description -->
          <p class="image-description">A stunning 4K anime wallpaper.</p>
          <!-- ✅ Ajout des tags dynamiques -->
@@ -669,7 +669,7 @@
             <button class="download-button download-button-4k" id="popup-4k-main-btn">
             <strong>Download in 4K (Free)</strong>
             </button>
-            <button class="download-button download-button-hd" onclick="forceDownload('https://i.ibb.co/SXg6fnQk/wallpaper-335.jpg')">
+            <button class="download-button download-button-hd" onclick="forceDownload('https://i.ibb.co/tTBKVFzn/wallpaper-335.jpg')">
             <strong>Download in HD</strong>
             </button>
          </div>
@@ -820,7 +820,7 @@
             document.addEventListener("DOMContentLoaded", function () {
             // Cibler le bouton de téléchargement
             const downloadButton = document.getElementById("downloadButton");
-            const imageUrl = "https://i.ibb.co/SXg6fnQk/wallpaper-335.jpg"; // Remplace avec l'URL de l'image
+            const imageUrl = "https://i.ibb.co/tTBKVFzn/wallpaper-335.jpg"; // Remplace avec l'URL de l'image
          
             // Ajouter un événement au clic sur le bouton
             downloadButton.addEventListener("click", function (e) {
@@ -1304,10 +1304,14 @@
             const mainTagsContainer = document.getElementById("main-image-tags");
          
             // ✅ Liste des tags injectés dynamiquement depuis le JSON
-            const mainImageTags = ["<span class="tag">anime</span> <span class="tag">4k</span> <span class="tag">hd</span>"]; // ⚠️ Assure-toi que cette variable est remplacée dynamiquement par ton script Python
+            const mainImageTags = ["<span class="tag">anime</span>
+<span class="tag">4k</span>
+<span class="tag">hd</span>"]; // ⚠️ Assure-toi que cette variable est remplacée dynamiquement par ton script Python
          
             // ✅ Vérifie si des tags existent
-            if (mainTagsContainer && mainImageTags.length > 0 && mainImageTags[0] !== "<span class="tag">anime</span> <span class="tag">4k</span> <span class="tag">hd</span>") {
+            if (mainTagsContainer && mainImageTags.length > 0 && mainImageTags[0] !== "<span class="tag">anime</span>
+<span class="tag">4k</span>
+<span class="tag">hd</span>") {
                 mainTagsContainer.innerHTML = ""; // Vide l'ancien contenu
          
                 mainImageTags.forEach(tag => {
@@ -1329,8 +1333,8 @@
             const mainDownloadButton4K = document.getElementById("popup-4k-main-btn");
          
             // ✅ Récupération directe des URLs injectées via le template
-            const mainImageUrlHD = "https://i.ibb.co/SXg6fnQk/wallpaper-335.jpg"; // Injection directe de l'URL HD
-            const mainImageUrl4K = "https://i.ibb.co/wNp6JsWq/wallpaper-335.jpg"; // Injection directe de l'URL 4K
+            const mainImageUrlHD = "https://i.ibb.co/tTBKVFzn/wallpaper-335.jpg"; // Injection directe de l'URL HD
+            const mainImageUrl4K = "https://i.ibb.co/fd36fCt0/wallpaper-335.jpg"; // Injection directe de l'URL 4K
          
             console.log("✅ Image principale détectée :", mainImageUrlHD, mainImageUrl4K);
          
