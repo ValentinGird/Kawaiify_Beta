@@ -567,10 +567,24 @@
          font-weight: bold;
          cursor: pointer; /* ✅ Rend le tag cliquable */
          transition: background-color 0.2s ease-in-out;
+         user-select: none; /* Empêche le navigateur de "garder" le focus sur le tag */
          }
          /* ✅ Effet au survol */
          .tag:hover {
          background-color: #FF1493;
+         }
+         .tag:not(.active) {
+         background-color: #2a2a2a !important; /* 🔥 Remet la couleur de base si désactivé */
+         }
+         /* ✅ Effet actif */
+         .tag:hover,
+         .tag.active {
+         background-color: #FF1493;
+         }
+         /* ✅ Empêcher le tag de rester rose après un second clic */
+         .tag:focus {
+         outline: none;
+         background-color: inherit !important; /* 🔥 Force à garder la couleur d'origine */
          }
          /* ✅ Effet quand un tag est actif (cliqué) */
          .tag.active {
@@ -1091,6 +1105,25 @@
          
          searchBar.addEventListener("input", filterImages);
          });
+         
+         
+         document.addEventListener("DOMContentLoaded", function () {
+         const tags = document.querySelectorAll(".tag");
+         
+         tags.forEach(tag => {
+         tag.addEventListener("click", function () {
+            this.classList.toggle("active");
+         
+            // ✅ Forcer le rafraîchissement visuel sur mobile
+            setTimeout(() => {
+                if (!this.classList.contains("active")) {
+                    this.style.backgroundColor = ""; // 🔥 Remet la couleur d'origine
+                }
+            }, 10);
+         });
+         });
+         });
+         
          
          
          

@@ -30,8 +30,12 @@
          flex-direction: column;
          flex-grow: 1;
          }
+         .image-box h2 {
+         margin-top: 0px; /* Réduit l’espace au-dessus */
+         }
          .image-box {
          background-color: #1e1e1e;
+         color: #FF69B4; /* Rose flashy */
          border: 1px solid #444;
          border-radius: 10px;
          padding: 20px;
@@ -557,9 +561,7 @@
          border-radius: 10px;
          margin-bottom: 15px; /* Ajuste selon ton besoin */
          margin-top: 0px; /* Ajuste la valeur selon ton besoin */
-
          }
-
          /* ✅ Barre de recherche */
          .search-bar {
          width: 100%;
@@ -615,10 +617,24 @@
          font-weight: bold;
          cursor: pointer; /* ✅ Rend le tag cliquable */
          transition: background-color 0.2s ease-in-out;
+         user-select: none; /* Empêche le navigateur de "garder" le focus sur le tag */
          }
          /* ✅ Effet au survol */
          .tag:hover {
          background-color: #FF1493;
+         }
+         /* ✅ Effet actif */
+         .tag:hover,
+         .tag.active {
+         background-color: #FF1493;
+         }
+         .tag:not(.active) {
+         background-color: #2a2a2a !important; /* 🔥 Remet la couleur de base si désactivé */
+         }
+         /* ✅ Empêcher le tag de rester rose après un second clic */
+         .tag:focus {
+         outline: none;
+         background-color: inherit !important; /* 🔥 Force à garder la couleur d'origine */
          }
          /* ✅ Effet quand un tag est actif (cliqué) */
          .tag.active {
@@ -688,10 +704,10 @@
             <h3>🎁 Download Your 4K Anime Wallpaper!</h3>
             <p>Enter your email to <strong>instantly download this wallpaper in ultra-sharp 4K</strong>.</p>
             <ul class="popup-benefits">
-    <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
-    <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
-    <li>Be the first to get <strong>new ultra-HD drops</strong></li>
-</ul>
+               <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
+               <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
+               <li>Be the first to get <strong>new ultra-HD drops</strong></li>
+            </ul>
             <!-- ✅ Formulaire d'inscription -->
             <form id="popup-4k-main-form">
                <input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
@@ -716,11 +732,10 @@
             <p>Enter your email to <strong>instantly download this wallpaper in ultra-sharp 4K</strong> and get exclusive benefits:</p>
             <!-- ✅ Liste des avantages -->
             <ul class="popup-benefits">
-    <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
-    <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
-    <li>Be the first to get <strong>new ultra-HD drops</strong></li>
-</ul>
-
+               <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
+               <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
+               <li>Be the first to get <strong>new ultra-HD drops</strong></li>
+            </ul>
             <!-- ✅ Formulaire d'inscription -->
             <form id="popup-4k-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
                <input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
@@ -1437,6 +1452,24 @@
                 console.error("❌ Erreur lors du téléchargement de l’image :", error);
             }
          }
+         
+         
+         document.addEventListener("DOMContentLoaded", function () {
+         const tags = document.querySelectorAll(".tag");
+         
+         tags.forEach(tag => {
+         tag.addEventListener("click", function () {
+            this.classList.toggle("active");
+         
+            // ✅ Forcer le rafraîchissement visuel sur mobile
+            setTimeout(() => {
+                if (!this.classList.contains("active")) {
+                    this.style.backgroundColor = ""; // 🔥 Remet la couleur d'origine
+                }
+            }, 10);
+         });
+         });
+         });
          
          
          
