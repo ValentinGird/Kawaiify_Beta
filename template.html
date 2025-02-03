@@ -1,419 +1,1445 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{TITLE}</title>
-	<!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://i.ibb.co/XZJbQPYm/favicon-32x32.png">
-	
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-			
-        }
-        .image-box {
-			background-color: #1e1e1e;
-			border: 1px solid #444;
-			border-radius: 10px;
-			padding: 20px;
-			width: 89%;  /* ✅ Même largeur que les autres sections */
-			max-width: 350px; /* ✅ Empêche qu'il soit trop large sur PC */
-			text-align: center;
-			margin: 0 auto; /* ✅ Centre parfaitement */
-			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-        }
-		
-        .image-box img {
-			width: 100%;
-            max-height: 500px; /* Limite la hauteur de l'image */
-            object-fit: cover; /* Adapte l'image sans la déformer */
-            border-radius: 10px; /* Conserve les bords arrondis */
-		}
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{TITLE}</title>
+      <!-- Favicon -->
+      <link rel="icon" type="image/png" href="https://i.ibb.co/XZJbQPYm/favicon-32x32.png">
+      <link rel="stylesheet" href="styles.css">
+      <style>
+         /* Dark mode */
+         * {
+         box-sizing: border-box;
+         }
+         html, body {
+         height: 100%;
+         margin: 0;
+         display: flex;
+         flex-direction: column;
+         }
+         body {
+         background-color: #121212;
+         color: #e0e0e0;
+         font-family: Arial, sans-serif;
+         text-align: center;
+         flex-grow: 1;
+         }
+         .container {
+         display: flex;
+         flex-direction: column;
+         flex-grow: 1;
+         }
+         .image-box {
+         background-color: #1e1e1e;
+         border: 1px solid #444;
+         border-radius: 10px;
+         padding: 20px;
+         width: 89%;  /* ✅ Même largeur que les autres sections */
+         max-width: 350px; /* ✅ Empêche qu'il soit trop large sur PC */
+         text-align: center;
+         margin: 0 auto; /* ✅ Centre parfaitement */
+         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin-bottom: 15px; /* Réduit l’espace entre chaque box */
+         }
+         .image-box img {
+         width: 100%;
+         max-height: 500px; /* Limite la hauteur de l'image */
+         object-fit: cover; /* Adapte l'image sans la déformer */
+         border-radius: 10px; /* Conserve les bords arrondis */
+         }
+         .button {
+         display: block;
+         margin-top: 10px;
+         padding: 12px;
+         background-color: #FF69B4;
+         color: white;
+         border-radius: 8px;
+         font-size: 16px;
+         cursor: pointer;
+         text-align: center;
+         text-decoration: none;
+         font-weight: bold;
+         width: 100%; /* Prend toute la largeur disponible */
+         max-width: 300px; /* Empêche que les boutons deviennent trop larges */
+         border: none; /* ✅ Supprime toute bordure grise */
+         box-shadow: none; /* ✅ Supprime toute ombre */
+         outline: none; /* ✅ Supprime le contour au focus */
+         }
+         .button:hover {
+         background-color: #FF1493;
+         }
+         .gallery {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+         gap: 10px; /* Réduit l'espace entre les cartes */
+         padding: 20px;
+         justify-items: center;
+         align-items: stretch; /* Permet d’avoir toutes les cartes à la même hauteur */
+         }
+         .logo-container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+         padding: 10px 0; /* Espace au-dessus et en dessous */
+         margin-top: 20px; /* ✅ Ajoute de l’espace au-dessus */
+         }
+         .logo-container img {
+         width: 90%;  /* ✅ Adapte la largeur au mobile sans dépasser */
+         max-width: 200px; /* ✅ Ne dépasse pas cette largeur sur PC */
+         height: auto; /* ✅ Garde les proportions */
+         object-fit: contain;
+         }
+         footer {
+         background-color: #333;
+         color: #bbb;
+         padding: 15px;
+         text-align: center;
+         margin-top: 30px;
+         }
+         footer a {
+         color: #FF69B4;
+         text-decoration: none;
+         }
+         footer a:hover {
+         text-decoration: underline;
+         }
+         /* ✅ Free Pack Offer - Alignement parfait */
+         .offer {
+         background-color: #1e1e1e;
+         border: 1px solid #444;
+         border-radius: 10px;
+         padding: 20px;
+         width: 89%;  /* ✅ Aligné avec les autres sections */
+         max-width: 350px; /* ✅ Même taille que les images de la galerie */
+         text-align: center;
+         margin: 0 auto; /* ✅ Centre parfaitement */
+         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         height: 100%; /* Ensure all sections have the same height */
+         }
+         /* ✅ Titre */
+         .offer h2 {
+         color: #FF69B4;
+         font-size: 1.5em;
+         margin-bottom: 10px;
+         }
+         /* ✅ Texte */
+         .offer p {
+         font-size: 0.9em;
+         color: #e0e0e0;
+         margin-bottom: 15px;
+         }
+         /* ✅ Image pack */
+         .offer img {
+         width: 100%;
+         height: auto;
+         max-height: 500px; /* ✅ Ajusté pour la galerie */
+         object-fit: cover;
+         border-radius: 10px;
+         margin-bottom: 10px;
+         }
+         /* ✅ Conteneur du formulaire */
+         email-input-container {
+         width: 100%;
+         max-width: 260px;
+         display: flex;
+         flex-direction: column;
+         align-items: center; /* ✅ Centre les éléments */
+         gap: 12px; /* ✅ Ajoute de l'espace entre les éléments */
+         }
+         /* ✅ Champ email */
+         .email-input {
+         width: 100%;
+         padding: 12px;
+         background-color: #2a2a2a;
+         border: none;
+         border-radius: 6px;
+         color: #fff;
+         font-size: 14px;
+         text-align: center;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+         transition: background-color 0.3s ease;
+         margin-bottom: 5px; /* 🔥 Espace sous l'input */
+         }
+         .email-input::placeholder {
+         color: #bbb;
+         }
+         .email-input:focus {
+         background-color: #444;
+         outline: none;
+         }
+         /* ✅ Bouton */
+         .email-input-button {
+         background-color: #FF69B4;
+         padding: 12px;
+         border: none;
+         width: 100%;
+         font-size: 14px;
+         color: #fff;
+         border-radius: 6px;
+         cursor: pointer;
+         text-align: center;
+         transition: background-color 0.3s ease;
+         }
+         /* ✅ Ajout d'un espace supplémentaire entre le champ email et le bouton */
+         .email-input-button {
+         margin-top: 5px; /* ✅ Petit espace pour éviter qu'ils ne se touchent */
+         }
+         .email-input-button:hover {
+         background-color: #FF1493;
+         }
+         footer {
+         background-color: #333;
+         color: #bbb;
+         padding: 10px;
+         margin-top: auto; /* Positionne le footer en bas */
+         text-align: center;
+         }
+         footer a {
+         color: #FF69B4; /* Rose pour les liens */
+         text-decoration: none;
+         }
+         footer a:hover {
+         text-decoration: underline;
+         }
+         /* ✅ Réduit l’espace entre les images de la galerie et les autres sections */
+         .gallery {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+         gap: 20px;
+         padding: 20px;
+         justify-items: center; /* Center the elements in the grid */
+         align-items: stretch; /* Ensure elements have the same height */
+         margin-bottom: 0px; /* Réduction maximale sans être collé */
+         margin-top: 0px !important;
+         }
+         /* ✅ Ajustement de l’espacement entre chaque image du scroll infini */
+         .gallery-offer {
+         background-color: #1e1e1e;
+         border: 1px solid #444;
+         border-radius: 10px;
+         padding: 20px;
+         margin: 0;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         align-items: center;
+         width: 100%;
+         max-width: 400px; /* Limit width to avoid large blocks on PC */
+         height: 100%; /* Ensure all sections have the same height */
+         margin-bottom: 10px; /* Réduction de l’espace en dessous */
+         }
+         /* ✅ Réduction de l’espace sous les images */
+         .gallery-offer img {
+         width: 100%;
+         max-height: 500px; /* Limite la hauteur de l'image */
+         object-fit: cover; /* Adapte l'image sans la déformer */
+         border-radius: 10px; /* Conserve les bords arrondis */
+         }
+         /* ✅ Réduction de l’espace entre les boutons et l’image */
+         .gallery-offer .button-container {
+         display: flex;
+         justify-content: center;
+         gap: 8px; /* Moins d’espace entre les boutons */
+         margin-top: 10px; /* Moins d’espace entre l’image et les boutons */
+         width: 100%;
+         }
+         .button-container {
+         width: 100%; /* Assure que le conteneur prend toute la largeur */
+         display: flex;
+         flex-direction: column; /* Met les boutons l'un sous l'autre */
+         gap: 5px; /* Ajoute un espace entre les boutons */
+         align-items: center; /* Centre les boutons horizontalement */
+         }
+         /* ✅ Ajustement du footer pour qu’il ne remonte pas trop */
+         footer {
+         width: 100%;
+         background-color: #333;
+         color: #bbb;
+         padding: 15px;
+         text-align: center;
+         position: relative;
+         margin-top: 30px; /* Un peu d’espace, mais pas trop */
+         }
+         .section-title {
+         font-size: 24px;
+         font-weight: bold;
+         color: #FF69B4; /* Couleur flashy rose */
+         text-align: center;
+         margin-top: 30px;
+         margin-bottom: 10px;
+         }
+         .gallery-description {
+         font-size: 14px;
+         color: #bbb;
+         text-align: center;
+         margin-bottom: 10px;
+         }
+         .gallery-description {
+         font-size: 16px; /* Augmentation de la taille */
+         font-weight: bold; /* Texte en gras */
+         color: #ffffff; /* Rose plus clair */
+         text-align: center;
+         margin-bottom: 20px;
+         background: rgba(255, 105, 180, 0.1); /* Légère couleur de fond */
+         padding: 10px;
+         border-radius: 0px;
+         display: inline-block;
+         }
+         /* ✅ Champ email */
+         .popup-email-input {
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0;
+         border: none;
+         border-radius: 6px;
+         text-align: center;
+         ont-size: 14px;
+         background-color: #2a2a2a;
+         color: white;
+         font-size: 16px; /* ✅ Empêche le zoom sur iOS */
+         }
+         /* ✅ Bouton du popup */
+         .popup-container .popup-button {
+         display: inline-block;
+         padding: 10px 20px;
+         background-color: #FF69B4;
+         color: white;
+         border-radius: 6px;
+         font-size: 14px;
+         cursor: pointer;
+         text-align: center;
+         border: none;
+         transition: background-color 0.3s ease;
+         text-decoration: none;
+         font-weight: bold;
+         }
+         .popup-container .popup-button:hover {
+         background-color: #FF1493;
+         }
+         .counter-text {
+         font-size: 14px;
+         color: #fff;
+         text-align: center;
+         margin-bottom: 5px;
+         font-weight: bold;
+         }
+         .info-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+         margin-top: 10px;
+         }
+         .logo-container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+         padding: 10px 0; /* Espace au-dessus et en dessous */
+         margin-top: 20px; /* ✅ Ajoute de l’espace au-dessus */
+         }
+         .logo-container img {
+         width: 90%;  /* ✅ Adapte la largeur au mobile sans dépasser */
+         max-width: 200px; /* ✅ Ne dépasse pas cette largeur sur PC */
+         height: auto; /* ✅ Garde les proportions */
+         object-fit: contain;
+         }
+         .download-button {
+         display: block;
+         width: 100%; 
+         padding: 10px;
+         font-size: 14px;
+         text-align: center;
+         border-radius: 6px;
+         font-weight: bold;
+         transition: background-color 0.3s ease;
+         }
+         .download-button:hover {
+         background-color: #FF1493;
+         }
+         /* ✅ Arrière-plan flou (overlay) */
+         .popup-overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+         backdrop-filter: blur(8px); /* Effet de flou */
+         display: none; /* Caché par défaut */
+         align-items: center;
+         justify-content: center;
+         z-index: 1000;
+         }
+         /* ✅ Style du popup CENTRÉ */
+         .popup-container {
+         background-color: #1e1e1e;
+         color: #ffffff;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+         text-align: center;
+         width: 90%;
+         max-width: 400px;
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         animation: fadeIn 0.3s ease-in-out;
+         /* ✅ Correction pour éviter l'espace inutile en bas */
+         max-height: 90vh;
+         overflow-y: auto;
+         width: 90%;
+         min-width: 300px;
+         display: flex;
+         flex-direction: column; /* ✅ Force les éléments à rester en colonne */
+         align-items: center;
+         text-align: center;
+         word-wrap: break-word; /* ✅ Force le texte à passer à la ligne */
+         overflow: hidden;
+         }
+         /* ✅ Ajustement pour mobile */
+         @media screen and (max-width: 600px) {
+         .popup-container {
+         width: 90%;
+         max-width: 350px;
+         padding: 15px;
+         }
+         }
+         /* ✅ Animation fluide */
+         @keyframes fadeIn {
+         from { opacity: 0; transform: translate(-50%, -55%); }
+         to { opacity: 1; transform: translate(-50%, -50%); }
+         }
+         /* ✅ Bouton de fermeture bien positionné */
+         .popup-close {
+         position: absolute;
+         top: 10px;
+         right: 15px;
+         font-size: 20px;
+         cursor: pointer;
+         color: #ffffff;
+         opacity: 0.8;
+         z-index: 10;
+         }
+         .popup-close:hover {
+         opacity: 1;
+         }
+         /* ✅ Style de la liste des avantages */
+         .popup-benefits {
+         text-align: left;
+         margin: 15px 0;
+         padding-left: 20px;
+         list-style: none;
+         }
+         .popup-benefits li {
+         font-size: 14px;
+         margin-bottom: 5px;
+         padding-left: 20px;
+         position: relative;
+         }
+         /* ✅ Ajout d'une icône devant chaque point */
+         .popup-benefits li::before {
+         content: "✅"; /* Emoji Checkmark */
+         position: absolute;
+         left: 0;
+         }
+         /* ✅ Style du bouton alternatif */
+         .popup-alt-download {
+         font-size: 13px;
+         margin-top: 15px;
+         color: #bbb;
+         }
+         /* ✅ Style de l'image du popup */
+         .popup-image {
+         width: 100%; /* Prend toute la largeur du popup */
+         max-width: 300px; /* Taille max pour ne pas être trop grande */
+         display: block;
+         margin: 0 auto 15px; /* Centrage + espace sous l'image */
+         border-radius: 8px; /* Coins arrondis pour un meilleur rendu */
+         }
+         .popup-container h3 {
+         margin-top: 0px; /* ✅ Réduit l’espace au-dessus du titre */
+         margin-bottom: 0px; /* ✅ Réduit l’espace sous le titre */
+         }
+         .popup-container p {
+         margin-bottom: 0px; /* ✅ Réduit l’espace entre la description et le reste */
+         }
+         /* ✅ Réduction de l’espace sous la liste des avantages */
+         .popup-benefits {
+         margin-bottom: 10px;
+         }
+         .popup-alt-button {
+         background: none;
+         border: none;
+         color: #bbb; /* Gris pour que ce soit discret */
+         font-size: 14px;
+         text-decoration: underline; /* Ajoute le style lien */
+         cursor: pointer;
+         padding: 0;
+         }
+         .popup-alt-button:hover {
+         color: #FF69B4; /* Rose au survol pour rester cohérent avec ton design */
+         }
+         .no-scroll {
+         overflow: hidden;
+         height: 100vh;
+         }
+         /* ✅ Style du bouton Download in HD (gris) */
+         .download-button-hd {
+         background-color: #555;
+         color: #ddd;
+         border: 2px solid #777;
+         margin-top: 10px; /* Réduit l'espace entre les boutons */
+         }
+         .download-button-hd:hover {
+         background-color: #666; /* Gris plus clair au survol */
+         border-color: #888;
+         }
+         /* ✅ Style du bouton Download in 4K (rose pour mettre en avant) */
+         .download-button-4k {
+         background-color: #FF69B4;
+         color: white;
+         border: 2px solid #FF69B4;
+         }
+         .download-button-hd:hover {
+         background-color: #666;
+         border-color: #888;
+         }
+         /* ✅ Style du bouton pour remonter en haut */
+         .scroll-top-button {
+         position: fixed;
+         bottom: 20px;
+         right: 20px;
+         width: 50px;
+         height: 50px;
+         background-color: #FF69B4; /* Rose flashy */
+         border: none;
+         border-radius: 50%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+         transition: opacity 0.3s ease-in-out, transform 0.2s ease;
+         z-index: 1000;
+         }
+         /* ✅ Effet au survol */
+         .scroll-top-button:hover {
+         background-color: #FF1493; /* Rose plus foncé */
+         transform: scale(1.1);
+         }
+         /* ✅ Style spécifique pour l'icône SVG */
+         .scroll-top-button svg {
+         width: 24px;
+         height: 24px;
+         stroke: white; /* ✅ Flèche blanche */
+         }
+         /* ✅ Conteneur de la barre de recherche */
+         .search-container {
+         display: flex;
+         justify-content: center; /* ✅ Centre la barre */
+         align-items: center;
+         margin: 20px auto; /* ✅ Ajoute un peu d'espace autour */
+         width: 90%;
+         max-width: 600px;
+         background-color: #1e1e1e;
+         padding: 10px;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+         border-radius: 10px;
+         }
+         /* ✅ Barre de recherche */
+         .search-bar {
+         width: 100%;
+         padding: 12px;
+         font-size: 16px;
+         border: 2px solid #FF69B4;
+         border-radius: 8px;
+         background-color: #1e1e1e;
+         color: white;
+         text-align: center;
+         }
+         /* ✅ Style du titre */
+         .image-title {
+         font-size: 18px;
+         font-weight: bold;
+         color: #FF69B4; /* Rose flashy */
+         margin-top: -5px; /* Réduction de l'espace au-dessus */
+         margin-bottom: 10px; /* Espacement avant l'image */
+         text-align: center;
+         }
+         /* ✅ Style de la description */
+         .image-description {
+         font-size: 14px;
+         color: #bbb;
+         margin: 5px 0;
+         text-align: center;
+         padding: 0 10px;
+         }
+         /* ✅ Conteneur des tags */
+         .tags-container {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 5px;
+         margin-bottom: 10px;
+         }
+         /* ✅ Style des tags */
+         .tag {
+         background-color: #FF69B4;
+         color: white;
+         padding: 5px 10px;
+         border-radius: 5px;
+         font-size: 12px;
+         font-weight: bold;
+         }
+         /* ✅ Style des tags */
+         .tag {
+         background-color: #FF69B4;
+         color: white;
+         padding: 5px 10px;
+         border-radius: 5px;
+         font-size: 12px;
+         font-weight: bold;
+         cursor: pointer; /* ✅ Rend le tag cliquable */
+         transition: background-color 0.2s ease-in-out;
+         }
+         /* ✅ Effet au survol */
+         .tag:hover {
+         background-color: #FF1493;
+         }
+         /* ✅ Effet quand un tag est actif (cliqué) */
+         .tag.active {
+         background-color: #FF1493;
+         border: 2px solid white;
+         }
+         /* ✅ Pour réactiver l'image mettre "display: block;" */
+         /* ✅ Pour désactiver l'image mettre "display: none;" */
+         .popup-image {
+         display: block; /* Cache l'image */
+         }
+         /* ✅ Tags non cliquables sous l'image principale */
+         .non-clickable {
+         cursor: default !important; /* Empêche le clic */
+         pointer-events: none; /* Désactive toute interaction */
+         opacity: 0.9; /* Légèrement différent visuellement */
+         }
+         /* ✅ Désactive les clics sur les tags sous l'image principale */
+         .tag.non-clickable {
+         cursor: default !important;
+         pointer-events: none;
+         opacity: 0.9; /* Légèrement différent visuellement */
+         }
+      </style>
+   </head>
+   <body>
+      <!-- ✅ Bouton de retour en haut -->
+      <button id="scrollTopButton" class="scroll-top-button">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+         </svg>
+      </button>
+      <div class="logo-container">
+         <a href="https://kawaiify.art">
+         <img src="https://i.ibb.co/rfGqdvc6/Logo-test.png" alt="Kawaiify Logo">
+         </a>
+      </div>
+      <!-- ✅ Barre de recherche -->
+      <div class="search-container">
+         <input type="text" id="searchBar" class="search-bar" placeholder="🔍 Search wallpapers...">
+      </div>
+      <!-- ✅ Section de l'image principale -->
+      <div class="image-box">
+         <h2>{TITLE}</h2>
+         <img src="{IMAGE_URL}" alt="Wallpaper">
+         <!-- ✅ Ajout de la description -->
+         <p class="image-description">{DESCRIPTION}</p>
+         <!-- ✅ Ajout des tags dynamiques -->
+         <div class="tags-container" id="main-image-tags"></div>
+         <!-- ✅ Boutons Download -->
+         <div class="button-container">
+            <button class="download-button download-button-4k" id="popup-4k-main-btn">
+            <strong>Download in 4K (Free)</strong>
+            </button>
+            <button class="download-button download-button-hd" onclick="forceDownload('{IMAGE_URL}')">
+            <strong>Download in HD</strong>
+            </button>
+         </div>
+      </div>
+      <!-- ✅ Popup Principal 4K -->
+      <div class="popup-overlay" id="popup-4k-main-overlay">
+         <div class="popup-container" id="popup-4k-main">
+            <span class="popup-close" onclick="closeMainPopup4K()">✖</span>
+            <!-- ✅ Image fixe pour comparer HD vs 4K -->
+            <img id="popup-4k-main-image" src="https://i.ibb.co/mV3h967M/adzdazzdaazdazd.png" alt="4K Wallpaper Preview" class="popup-image">
+            <!-- ✅ Titre et description fixes -->
+            <h3>🎁 Download Your 4K Anime Wallpaper!</h3>
+            <p>Enter your email to <strong>instantly download this wallpaper in ultra-sharp 4K</strong>.</p>
+            <ul class="popup-benefits">
+    <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
+    <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
+    <li>Be the first to get <strong>new ultra-HD drops</strong></li>
+</ul>
+            <!-- ✅ Formulaire d'inscription -->
+            <form id="popup-4k-main-form">
+               <input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
+               <button type="submit" class="popup-button">📥 Download in 4K (Free)</button>
+            </form>
+            <!-- ✅ Téléchargement sans email -->
+            <p class="popup-alt-download">
+               Prefer not to enter your email? <br>
+               <a href="#" id="popup-4k-main-hd-download" class="popup-alt-button">Download in HD (No email)</a>
+            </p>
+         </div>
+      </div>
+      <!-- ✅ Popup 4K Gallery -->
+      <div class="popup-overlay" id="popup-4k-overlay">
+         <div class="popup-container" id="popup-4k">
+            <span class="popup-close" onclick="closePopup4K()">✖</span>
+            <!-- ✅ Image d'illustration 4K vs HD -->
+            <img src="https://i.ibb.co/mV3h967M/adzdazzdaazdazd.png" alt="4K vs HD Comparison" class="popup-image">
+            <!-- ✅ Titre du popup -->
+            <h3>🎁 Download Your 4K Anime Wallpaper!</h3>
+            <!-- ✅ Description rapide -->
+            <p>Enter your email to <strong>instantly download this wallpaper in ultra-sharp 4K</strong> and get exclusive benefits:</p>
+            <!-- ✅ Liste des avantages -->
+            <ul class="popup-benefits">
+    <li>Get <strong>5 new exclusive 4K wallpapers</strong> every month</li>
+    <li>Access <strong>secret wallpapers</strong> only available to subscribers</li>
+    <li>Be the first to get <strong>new ultra-HD drops</strong></li>
+</ul>
 
-        .button {
-            display: block;
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #FF69B4;
-            color: white;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-			width: 89%; /* ✅ Permet d'aligner la largeur du bouton avec l'image */
-			max-width: 400px; /* ✅ Empêche que le bouton devienne trop large */
-			border: none; /* ✅ Supprime toute bordure grise */
-			box-shadow: none; /* ✅ Supprime toute ombre */
-			outline: none; /* ✅ Supprime le contour au focus */
-        }
-        .button:hover {
-            background-color: #FF1493;
-        }
-        .gallery {
-			display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            justify-items: center; /* Center the elements in the grid */
-            align-items: stretch; /* Ensure elements have the same height */
-			margin-bottom: 0px; /* Réduction maximale sans être collé */
-			margin-top: 0px !important;
-        }
-		
-		.logo-container {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 100%;
-			padding: 10px 0; /* Espace au-dessus et en dessous */
-			margin-top: 20px; /* ✅ Ajoute de l’espace au-dessus */
-		}
-		
-		.logo-container img {
-			width: 90%;  /* ✅ Adapte la largeur au mobile sans dépasser */
-			max-width: 200px; /* ✅ Ne dépasse pas cette largeur sur PC */
-			height: auto; /* ✅ Garde les proportions */
-			object-fit: contain;
-		}
-		footer {
-            background-color: #333;
-            color: #bbb;
-            padding: 15px;
-            text-align: center;
-            margin-top: 30px;
-        }
-        footer a {
-            color: #FF69B4;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-		
-		/* ✅ Free Pack Offer - Alignement parfait */
-		.offer {
-			background-color: #1e1e1e;
-			border: 1px solid #444;
-			border-radius: 10px;
-			padding: 20px;
-			width: 89%;  /* ✅ Aligné avec les autres sections */
-			max-width: 350px; /* ✅ Même taille que les images de la galerie */
-			text-align: center;
-			margin: 0 auto; /* ✅ Centre parfaitement */
-			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-
-		/* ✅ Titre */
-		.offer h2 {
-			color: #FF69B4;
-			font-size: 1.5em;
-			margin-bottom: 10px;
-		}
-
-		/* ✅ Texte */
-		.offer p {
-			font-size: 0.9em;
-			color: #e0e0e0;
-			margin-bottom: 15px;
-		}
-
-		/* ✅ Image pack */
-		.offer img {
-			width: 100%;
-			height: auto;
-			max-height: 500px; /* ✅ Ajusté pour la galerie */
-			object-fit: cover;
-			border-radius: 10px;
-			margin-bottom: 10px;
-		}
-
-		/* ✅ Conteneur du formulaire */
-			email-input-container {
-			width: 100%;
-			max-width: 260px;
-			display: flex;
-			flex-direction: column;
-			align-items: center; /* ✅ Centre les éléments */
-			gap: 12px; /* ✅ Ajoute de l'espace entre les éléments */
-		}
-
-		/* ✅ Champ email */
-			.email-input {
-			width: 93%;
-			padding: 12px;
-			background-color: #2a2a2a;
-			border: none;
-			border-radius: 6px;
-			color: #fff;
-			font-size: 14px;
-			text-align: center;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-			transition: background-color 0.3s ease;
-		}
-
-		.email-input::placeholder {
-			color: #bbb;
-		}
-
-		.email-input:focus {
-			background-color: #444;
-			outline: none;
-		}
-
-		/* ✅ Bouton */
-		.email-input-button {
-			background-color: #FF69B4;
-			padding: 12px;
-			border: none;
-			width: 100%;
-			font-size: 14px;
-			color: #fff;
-			border-radius: 6px;
-			cursor: pointer;
-			text-align: center;
-			transition: background-color 0.3s ease;
-		}
-
-		/* ✅ Ajout d'un espace supplémentaire entre le champ email et le bouton */
-		.email-input-button {
-			margin-top: 5px; /* ✅ Petit espace pour éviter qu'ils ne se touchent */
-		}
-
-		.email-input-button:hover {
-			background-color: #FF1493;
-		}
-		
-		/* ✅ Style du popup */
-		.popup-container {
-			position: fixed;
-			bottom: 20px;
-			right: 20px;
-			width: 300px;
-			background-color: #1e1e1e;
-			color: #ffffff;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-			text-align: center;
-			z-index: 9999;
-			display: none; /* Caché par défaut */
-		}
-
-		/* ✅ Titre du popup */
-		.popup-container h3 {
-			margin: 0;
-			font-size: 18px;
-			color: #FF69B4; /* Rose flashy */
-		}
-
-		/* ✅ Texte du popup */
-		.popup-container p {
-			font-size: 14px;
-			margin: 10px 0;
-			opacity: 0.9;
-		}
-
-		/* ✅ Champ email */
-		.popup-email-input {
-			width: 100%;
-			padding: 10px;
-			margin: 10px 0;
-			border: none;
-			border-radius: 6px;
-			text-align: center;
-			font-size: 14px;
-			background-color: #2a2a2a;
-			color: white;
-		}
-
-		/* ✅ Bouton du popup */
-		.popup-container .popup-button {
-			display: inline-block;
-			padding: 10px 20px;
-			background-color: #FF69B4;
-			color: white;
-			border-radius: 6px;
-			font-size: 14px;
-			cursor: pointer;
-			text-align: center;
-			border: none;
-			transition: background-color 0.3s ease;
-			text-decoration: none;
-			font-weight: bold;
-		}
-
-		.popup-container .popup-button:hover {
-			background-color: #FF1493;
-		}
-
-		/* ✅ Bouton de fermeture */
-		.popup-close {
-			position: absolute;
-			top: 8px;
-			right: 12px;
-			font-size: 16px;
-			cursor: pointer;
-			color: #ffffff;
-			opacity: 0.7;
-		}
-
-		.popup-close:hover {
-			opacity: 1;
-		}
-
-    </style>
-</head>
-<body>
-	<div class="logo-container">
-		<a href="https://kawaiify.art">
-        <img src="https://i.ibb.co/rfGqdvc6/Logo-test.png" alt="Kawaiify Logo">
-		</a>
-	</div>
-	
-	<!-- ✅ Popup Email -->
-	<div class="popup-container" id="email-popup">
-		<span class="popup-close" onclick="closePopup()">✖</span>
-
-		<h3>🎁 Get 100+ Free 4K Wallpapers!</h3>
-
-		<p class="popup-description">
-        🌸 Featuring <strong>beautiful anime girls</strong>, stylish aesthetics & stunning artwork.<br>
-        📥 Download your exclusive pack <strong>for free</strong> now!
-		</p>
-
-		<form id="popup-email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
-			<input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
-			<button type="submit" class="popup-button">Claim Your Pack</button>
-		</form>
-	</div>
-
-	
-    <div class="container">
-        <div class="image-box">
-            <h2>{TITLE}</h2>
-            <img src="{IMAGE_URL}" alt="Wallpaper">
-            <a href="#" id="downloadButton" class="button">Download in HD</a>
-        </div>
-    </div>
-	
-	<!-- Free Pack Offer -->
-<div class="offer" id="free-offer-section">
-    <h2>Unlock 100+ Stunning 4K Wallpapers for Free!</h2>
-				<p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>ultra-sharp 4K</strong> resolution to enhance your device! 📲</p>
-    <img src="https://i.ibb.co/FmT37qd/Banner-Patreon-Website-V2.png" alt="Free pack preview">
-    <div class="email-input-container">
-        <form id="email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
-            <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-            <button type="submit" id="email-submit-button" class="email-input-button">Claim Your Free Pack</button>
-        </form>
-    </div>
-</div>
-	
-    <h2 class="section-title">Latest Wallpapers</h2>
-    <div class="gallery" id="gallery"></div>
-    <footer>
-        <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
-    </footer>
-    <script>
-	
-    document.addEventListener("DOMContentLoaded", function () {
-    // Cibler le bouton de téléchargement
-    const downloadButton = document.getElementById("downloadButton");
-    const imageUrl = "{IMAGE_URL}"; // Remplace avec l'URL de l'image
-
-    // Ajouter un événement au clic sur le bouton
-    downloadButton.addEventListener("click", function (e) {
-        e.preventDefault();  // Empêcher le comportement par défaut du lien
-        
-        // Utiliser fetch pour récupérer l'image
-        fetch(imageUrl)
-            .then(response => response.blob())  // Convertir l'image en blob
-            .then(blob => {
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blob); // Créer une URL pour l'image blob
-                a.download = imageUrl.split("/").pop(); // Téléchargement avec le nom de l'image
-                document.body.appendChild(a);
-                a.click();  // Simule un clic sur le lien
-                document.body.removeChild(a);  // Retire l'élément après le clic
-            })
-            .catch(error => console.error("Erreur lors du téléchargement :", error));
-    });
-});
-
-	
-        document.addEventListener("DOMContentLoaded", function () {
-            let gallery = document.getElementById("gallery");
-            let imageUrls = [];
-            fetch('https://raw.githubusercontent.com/ValentinGird/Kawaiify/main/images.json')
-                .then(response => response.json())
-                .then(data => {
-                    imageUrls = data.images.filter(url => url !== "{IMAGE_URL}");
-                    imageUrls.forEach(imgUrl => {
-                        let div = document.createElement("div");
-                        div.className = "image-box";
-                        div.innerHTML = `<img src="${imgUrl}" alt="Wallpaper">
-						<button class="button" onclick="downloadImage('${imgUrl}')">Download in HD</button>`;
-                        gallery.appendChild(div);
-                    });
+            <!-- ✅ Formulaire d'inscription -->
+            <form id="popup-4k-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+               <input type="email" name="email" class="popup-email-input" placeholder="Enter your email" required>
+               <button type="submit" class="popup-button">📥 Download in 4K (Free)</button>
+            </form>
+            <!-- ✅ Option sans email -->
+            <p class="popup-alt-download">Prefer not to enter your email? <br>
+               <a href="#" id="download-hd-button" class="popup-alt-button" data-url="">Download in HD (No email)</a>
+            </p>
+         </div>
+      </div>
+      <!-- Free Pack Offer -->
+      <div class="offer" id="free-offer-section">
+         <h2>Unlock 100+ Stunning 4K Wallpapers for Free!</h2>
+         <p>Get a free pack of over <strong>100 high-quality anime wallpapers</strong> in <strong>ultra-sharp 4K</strong> resolution to enhance your device! 📲</p>
+         <img src="https://i.ibb.co/FmT37qd/Banner-Patreon-Website-V2.png" alt="Free pack preview">
+         <div class="email-input-container">
+            <form id="email-form" action="https://form.flodesk.com/forms/679762dbb32b1d435468220c/submit" method="POST">
+               <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+               <button type="submit" id="email-submit-button" class="email-input-button">Claim Your Free Pack</button>
+            </form>
+         </div>
+      </div>
+      <h2 class="section-title">Similar Wallpapers</h2>
+      <div class="gallery" id="gallery"></div>
+      <footer>
+         <p>&copy; 2025 Kawaiify | <a href="https://tonsite.com/privacy">Privacy Policy</a></p>
+      </footer>
+      <script>
+         // ✅ Fonction pour forcer le téléchargement direct d’une image HD
+            async function forceDownload(imageUrl) {
+                try {
+                    const response = await fetch(imageUrl);
+                    const blob = await response.blob();
+                    const blobUrl = window.URL.createObjectURL(blob);
+         
+                    const a = document.createElement("a");
+                    a.href = blobUrl;
+                    a.download = "wallpaper.jpg";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+         
+                    setTimeout(() => {
+                        window.URL.revokeObjectURL(blobUrl);
+                    }, 1000);
+                } catch (error) {
+                    console.error("❌ Erreur lors du téléchargement de l’image :", error);
+                }
+            }
+         
+            // ✅ Fonction pour ouvrir le popup 4K et stocker l’URL de l’image
+            function openPopup4K(imageUrlHD, imageUrl4K) {
+                if (localStorage.getItem("emailSubmitted") === "true") {
+                    forceDownload(imageUrl4K); // ✅ Si l'email est déjà soumis, on télécharge directement en 4K
+                } else {
+                    document.getElementById("popup-4k-overlay").style.display = "flex";
+                    document.body.style.overflow = "hidden";
+         
+                    // ✅ Mise à jour du bouton dans le popup avec l'URL correcte
+                    setPopupDownloadUrl(imageUrlHD, imageUrl4K);
+                }
+            }
+         
+            // ✅ Fonction pour mettre à jour le bouton HD dans le popup
+            function setPopupDownloadUrl(imageUrlHD, imageUrl4K) {
+                const downloadHdPopupButton = document.getElementById("download-hd-button");
+                if (downloadHdPopupButton) {
+                    downloadHdPopupButton.onclick = function (event) {
+                        event.preventDefault();
+                        forceDownload(imageUrlHD);
+                        closePopup4K();
+                    };
+                }
+            }
+         
+            // ✅ Fonction pour fermer le popup
+            function closePopup4K() {
+                document.getElementById("popup-4k-overlay").style.display = "none";
+                document.body.style.overflow = "";
+            }
+         
+            // ✅ Capture la soumission du formulaire du popup pour masquer définitivement
+            document.getElementById("popup-4k-form").addEventListener("submit", function () {
+                localStorage.setItem("emailSubmitted", "true"); // ✅ Enregistre l'email soumis
+                closePopup4K();
+            });
+         
+            // ✅ Ferme le popup si on clique en dehors
+            document.getElementById("popup-4k-overlay").addEventListener("click", function (event) {
+                if (event.target === this) {
+                    closePopup4K();
+                }
+            });
+         
+            // ✅ Ferme le popup avec la croix (✖)
+            document.querySelector(".popup-close").addEventListener("click", function () {
+                closePopup4K();
+            });
+         
+            document.addEventListener("DOMContentLoaded", function () {
+            // Cibler le bouton de téléchargement
+            const downloadButton = document.getElementById("downloadButton");
+            const imageUrl = "{IMAGE_URL}"; // Remplace avec l'URL de l'image
+         
+            // Ajouter un événement au clic sur le bouton
+            downloadButton.addEventListener("click", function (e) {
+                e.preventDefault();  // Empêcher le comportement par défaut du lien
+                
+                // Utiliser fetch pour récupérer l'image
+                fetch(imageUrl)
+                    .then(response => response.blob())  // Convertir l'image en blob
+                    .then(blob => {
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(blob); // Créer une URL pour l'image blob
+                        a.download = imageUrl.split("/").pop(); // Téléchargement avec le nom de l'image
+                        document.body.appendChild(a);
+                        a.click();  // Simule un clic sur le lien
+                        document.body.removeChild(a);  // Retire l'élément après le clic
+                    })
+                    .catch(error => console.error("Erreur lors du téléchargement :", error));
+            });
+         });
+         
+            document.addEventListener("DOMContentLoaded", function () {
+            // ✅ Bouton 4K principal (page individuelle)
+            const mainDownload4K = document.getElementById("main-download-4k");
+            if (mainDownload4K) {
+                mainDownload4K.addEventListener("click", function () {
+                    const imgElement = document.querySelector(".image-box img");
+                    const imageUrlHD = imgElement ? imgElement.src : null;
+                    const imageUrl4K = imageUrlHD ? imageUrlHD.replace("wallpaper-", "wallpaper-4k-") : null;
+         
+                    if (imageUrlHD && imageUrl4K) {
+                        openPopup4K(imageUrlHD, imageUrl4K);
+                    } else {
+                        console.error("❌ Impossible de trouver les URLs des images !");
+                    }
                 });
-        });
-		
-		function downloadImage(url) {
-    fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = url.split("/").pop(); // Prend juste le nom du fichier
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        })
-        .catch(error => console.error("Erreur lors du téléchargement :", error));
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("email-popup");
-    const emailSubmitted = localStorage.getItem("emailSubmitted");
-
-    if (!emailSubmitted) {
-        setTimeout(() => {
-            popup.style.display = "block";
-        }, 5000); // ✅ Affiche après 5 secondes
-    }
-
-    window.closePopup = function () {
-        popup.style.display = "none";
-    };
-
-    const popupEmailForm = document.getElementById("popup-email-form");
-    popupEmailForm.addEventListener("submit", function () {
-        localStorage.setItem("emailSubmitted", "true");
-    });
-});
-
-    </script>
-</body>
+            }
+         });
+         
+         
+         
+         // ✅ Fonction pour filtrer les images
+                    function filterImages() {
+                    console.log("🔎 Filtrage en cours...");
+                    const searchInput = document.getElementById("searchBar").value.toLowerCase().trim();
+                    const searchTerms = searchInput.split(" ").filter(Boolean); // Liste des mots-clés actifs
+                    
+                    const galleryItems = document.querySelectorAll(".gallery-offer");
+                    
+                    galleryItems.forEach(item => {
+                    const title = item.querySelector(".image-title") ? item.querySelector(".image-title").textContent.toLowerCase() : "";
+                    const description = item.querySelector(".image-description") ? item.querySelector(".image-description").textContent.toLowerCase() : "";
+                    const tags = Array.from(item.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase());
+                    
+                    if (searchTerms.length === 0) {
+                       item.style.display = "block"; // ✅ Si aucune recherche active, on affiche tout
+                       return;
+                    }
+                    
+                    // ✅ Vérifie si TOUS les tags sélectionnés sont dans les tags de l'image
+                    const allTagsMatch = searchTerms.every(term => 
+                       title.includes(term) || 
+                       description.includes(term) || 
+                       tags.includes(term)
+                    );
+                    
+                    item.style.display = allTagsMatch ? "block" : "none"; // ✅ Affiche seulement si tous les tags sont présents
+                    });
+                    
+                    console.log("✅ Filtrage terminé !");
+                    }
+                    
+                    
+                    
+                    // ✅ Fonction pour filtrer les images en cliquant sur un tag
+                    function filterByTag(tag) {
+                    console.log(`🔎 Filtrage par tag: ${tag}`);
+                    
+                    const searchBar = document.getElementById("searchBar");
+                    if (!searchBar) {
+                    console.error("❌ ERREUR: La barre de recherche est introuvable !");
+                    return;
+                    }
+                    
+                    let searchTerms = searchBar.value.toLowerCase().trim().split(" ").filter(Boolean); // Convertit en tableau de mots clés
+                    
+                    if (searchTerms.includes(tag.toLowerCase())) {
+                    // ✅ Si le tag est déjà dans la recherche, on l'enlève
+                    searchTerms = searchTerms.filter(t => t !== tag.toLowerCase());
+                    } else {
+                    // ✅ Sinon, on l'ajoute
+                    searchTerms.push(tag.toLowerCase());
+                    }
+                    
+                    searchBar.value = searchTerms.join(" "); // Met à jour la barre de recherche avec les tags sélectionnés
+                    
+                    if (searchTerms.length === 0) {
+                    searchBar.value = ""; // ✅ Si plus aucun tag n'est sélectionné, on vide la barre
+                    }
+                    
+                    filterImages(); // Relance le filtrage
+                    }
+                    
+                    
+                    
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const lazyImages = document.querySelectorAll("img[loading='lazy']");
+                    
+                        const observer = new IntersectionObserver(
+                            (entries, observer) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        const img = entry.target;
+                                        img.src = img.dataset.src; // Remplace l'attribut data-src par src
+                                        observer.unobserve(img);
+                                    }
+                                });
+                            },
+                            { rootMargin: "100px" } // Déclenche un peu avant l'affichage
+                        );
+                    
+                        lazyImages.forEach((img) => {
+                            observer.observe(img);
+                        });
+                    });
+                    
+                    document.addEventListener("DOMContentLoaded", async function () {
+            let isLoading = false;
+            const imagesPerLoad = 10;
+            let loadedImages = new Set();
+            const gallery = document.getElementById("gallery");
+            let imageUrls = [];
+            let nextImageIndex = 0;
+            
+            // ✅ Récupère les tags de l’image principale
+            const mainTagsContainer = document.getElementById("main-image-tags");
+            const mainTags = mainTagsContainer ? 
+                Array.from(mainTagsContainer.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase()) 
+                : [];
+         
+            console.log("🔎 Tags de l'image principale :", mainTags);
+         
+            // ✅ Fonction pour charger les images
+            async function fetchImages() {
+                if (isLoading || nextImageIndex >= imageUrls.length) return;
+                isLoading = true;
+         
+                try {
+                    // ✅ Sélectionne le prochain lot d'images à charger
+                    const imagesToLoad = imageUrls.slice(nextImageIndex, nextImageIndex + imagesPerLoad);
+                    nextImageIndex += imagesPerLoad;
+         
+                    imagesToLoad.forEach(imgData => {
+                        if (!loadedImages.has(imgData.url)) {
+                            loadedImages.add(imgData.url);
+         
+                            const offerDiv = document.createElement("div");
+                            offerDiv.className = "offer gallery-offer";
+         
+                            // ✅ Image
+                            const imgElement = document.createElement("img");
+                            imgElement.src = imgData.url;
+                            imgElement.alt = imgData.title;
+                            imgElement.loading = "lazy";
+         
+                            // ✅ Titre
+                            const titleElement = document.createElement("h3");
+                            titleElement.className = "image-title";
+                            titleElement.textContent = imgData.title;
+         
+                            // ✅ Description
+                            const descriptionElement = document.createElement("p");
+                            descriptionElement.className = "image-description";
+                            descriptionElement.textContent = imgData.description;
+         
+                            // ✅ Génération des tags cliquables
+                            const tagsContainer = document.createElement("div");
+                            tagsContainer.className = "tags-container";
+                            imgData.tags.forEach(tag => {
+                                const tagSpan = document.createElement("span");
+                                tagSpan.className = "tag";
+                                tagSpan.textContent = tag;
+                                
+                                // ✅ Active/Désactive le tag au clic
+                                tagSpan.addEventListener("click", function () {
+                                    this.classList.toggle("active"); // Change l'état du tag visuellement
+                                    filterByTag(tag); // Applique le filtrage
+                                });
+         
+                                tagsContainer.appendChild(tagSpan);
+                            });
+         
+                            // ✅ Compteur de téléchargements
+                            let storedCount = localStorage.getItem(`clickCount_${imgData.url}`);
+                            if (storedCount === null) {
+                                storedCount = Math.floor(Math.random() * (15000 - 900 + 1)) + 900;
+                                localStorage.setItem(`clickCount_${imgData.url}`, storedCount);
+                            }
+         
+                            const downloadCounter = document.createElement("p");
+                            downloadCounter.className = "counter-text";
+                            downloadCounter.innerHTML = `🔥 Downloaded by ${storedCount.toLocaleString()} people!`;
+         
+                            // ✅ Bouton HD
+                            const downloadButtonHD = document.createElement("button");
+                            downloadButtonHD.className = "download-button download-button-hd";
+                            downloadButtonHD.innerHTML = "<strong>Download in HD</strong>";
+                            downloadButtonHD.addEventListener("click", function () {
+                                forceDownload(imgData.url);
+                            });
+         
+                            // ✅ Bouton 4K (popup)
+                            const download4KButtonPopup = document.createElement("button");
+                            download4KButtonPopup.className = "download-button download-button-4k";
+                            download4KButtonPopup.innerHTML = "<strong>Download in 4K (Free)</strong>";
+                            download4KButtonPopup.addEventListener("click", function () {
+                                openPopup4K(imgData.url, imgData.url_4k);
+                            });
+         
+                            // ✅ Ajout des éléments
+                            offerDiv.appendChild(titleElement);
+                            offerDiv.appendChild(imgElement);
+                            offerDiv.appendChild(descriptionElement);
+                            offerDiv.appendChild(tagsContainer);
+                            offerDiv.appendChild(downloadCounter);
+                            offerDiv.appendChild(download4KButtonPopup);
+                            offerDiv.appendChild(downloadButtonHD);
+         
+                            gallery.appendChild(offerDiv);
+                        }
+                    });
+                } catch (error) {
+                    console.error("❌ Erreur lors du chargement des images :", error);
+                }
+         
+                isLoading = false;
+            }
+         
+            // ✅ Fonction pour charger et trier les images initiales
+            async function loadInitialImages() {
+                try {
+                    const response = await fetch("https://raw.githubusercontent.com/ValentinGird/Kawaiify_Beta/main/images.json");
+                    if (!response.ok) throw new Error("❌ Problème de récupération du fichier JSON");
+         
+                    const data = await response.json();
+                    imageUrls = data.images;
+         
+                    if (!imageUrls || imageUrls.length === 0) {
+                        console.warn("⚠️ Aucune image trouvée !");
+                        return;
+                    }
+         
+                    // ✅ Ajoute un score de pertinence basé sur les tags en commun
+                    imageUrls.forEach(img => {
+                        img.score = 0;
+                        if (img.tags) {
+                            const commonTags = img.tags.filter(tag => mainTags.includes(tag.toLowerCase()));
+                            img.score = commonTags.length; // Plus il y a de tags communs, plus le score est élevé
+                        }
+                    });
+         
+                    // ✅ Trie les images par score (celles avec le plus de tags en commun en premier)
+                    imageUrls.sort((a, b) => b.score - a.score);
+         
+                    console.log("✅ Images triées par pertinence :", imageUrls);
+         
+                    // ✅ Charge les images triées en premier
+                    fetchImages();
+                } catch (error) {
+                    console.error("❌ Erreur lors de la récupération du fichier JSON :", error);
+                }
+            }
+         
+            loadInitialImages();
+         
+            // ✅ Chargement infini sur scroll
+            window.addEventListener("scroll", function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                    fetchImages();
+                }
+                    });
+                    
+                    // ✅ OUVERTURE DU POPUP 4K PRINCIPAL
+         function openMainPopup4K(imageUrlHD, imageUrl4K) {
+            const popup = document.getElementById("popup-4k");
+            const overlay = document.getElementById("popup-4k-overlay");
+         
+            if (!popup || !overlay) {
+                console.error("❌ ERREUR : Le popup principal 4K n'existe pas !");
+                return;
+            }
+         
+            if (hasSubmittedEmail()) {
+                forceDownload(imageUrl4K);
+            } else {
+                overlay.style.display = "flex";
+                popup.style.display = "flex";
+                overlay.style.opacity = "0";
+                popup.style.opacity = "0";
+                popup.style.transform = "translate(-50%, -55%)";
+         
+                setTimeout(() => {
+                    overlay.style.opacity = "1";
+                    popup.style.opacity = "1";
+                    popup.style.transform = "translate(-50%, -50%)";
+                }, 10);
+         
+                setPopupDownloadUrl(imageUrlHD, imageUrl4K);
+            }
+         }
+         
+         // ✅ FERMETURE DU POPUP 4K PRINCIPAL
+         function closeMainPopup4K() {
+            const popup = document.getElementById("popup-4k");
+            const overlay = document.getElementById("popup-4k-overlay");
+         
+            if (!popup || !overlay) return;
+         
+            popup.style.opacity = "0";
+            popup.style.transform = "translate(-50%, -55%)";
+            overlay.style.opacity = "0";
+         
+            setTimeout(() => {
+                popup.style.display = "none";
+                overlay.style.display = "none";
+            }, 300);
+         }
+         
+            // ✅ Capture la soumission du formulaire pour masquer définitivement le popup
+            const popupForm = document.getElementById("popup-4k-form");
+            if (popupForm) {
+                popupForm.addEventListener("submit", function () {
+                    setEmailSubmitted(); // ✅ Marque l'email comme soumis
+                    closePopup4K();
+                });
+            } else {
+                console.warn("⚠️ Avertissement : Formulaire 4K introuvable.");
+            }
+         
+            // ✅ Ferme le popup si on clique sur l'overlay
+            const popupOverlay = document.getElementById("popup-4k-overlay");
+            if (popupOverlay) {
+                popupOverlay.addEventListener("click", function (event) {
+                    if (event.target === this) {
+                        closePopup4K();
+                    }
+                });
+            }
+         
+            // ✅ Ferme le popup quand on clique sur la croix (✖)
+            const popupCloseButton = document.querySelector(".popup-close");
+            if (popupCloseButton) {
+                popupCloseButton.addEventListener("click", function () {
+                    closePopup4K();
+                });
+            } else {
+                console.warn("⚠️ Avertissement : Bouton de fermeture du popup introuvable.");
+            }
+         });
+                    
+                    
+                    document.addEventListener("DOMContentLoaded", function () {
+                    const emailInput = document.querySelector(".popup-email-input"); // Sélectionne l'input email
+                    
+                    if (emailInput) {
+                    emailInput.addEventListener("focus", function () {
+                    setTimeout(() => {
+                        emailInput.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }, 300); // Petit délai pour éviter les bugs de transition
+                    });
+                    }
+                    });
+                    
+                    
+                    
+                    document.addEventListener("DOMContentLoaded", function () {
+                    const scrollTopButton = document.getElementById("scrollTopButton");
+                    
+                    // ✅ Affiche le bouton quand on scrolle vers le bas
+                    window.addEventListener("scroll", function () {
+                    if (window.scrollY > 300) { // Affiche à partir de 300px de scroll
+                    scrollTopButton.style.display = "block";
+                    } else {
+                    scrollTopButton.style.display = "none";
+                    }
+                    });
+                    
+                    // ✅ Scroll smooth vers le haut quand on clique sur la flèche
+                    scrollTopButton.addEventListener("click", function () {
+                    window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                    });
+                    });
+                    });
+                    
+                    
+                    function filterByTag(tag) {
+                    console.log(`🔎 Filtrage par tag: ${tag}`);
+                    
+                    const searchBar = document.getElementById("searchBar");
+                    if (!searchBar) {
+                    console.error("❌ ERREUR: La barre de recherche est introuvable !");
+                    return;
+                    }
+                    
+                    let searchTerms = searchBar.value.toLowerCase().trim().split(" ").filter(Boolean); // Convertit en tableau de mots clés
+                    
+                    if (searchTerms.includes(tag.toLowerCase())) {
+                    // ✅ Si le tag est déjà dans la recherche, on l'enlève
+                    searchTerms = searchTerms.filter(t => t !== tag.toLowerCase());
+                    } else {
+                    // ✅ Sinon, on l'ajoute
+                    searchTerms.push(tag.toLowerCase());
+                    }
+                    
+                    searchBar.value = searchTerms.join(" "); // Met à jour la barre de recherche avec les tags sélectionnés
+                    
+                    if (searchTerms.length === 0) {
+                    searchBar.value = ""; // ✅ Si plus aucun tag n'est sélectionné, on vide la barre
+                    }
+                    
+                    filterImages(); // Relance le filtrage
+                    }
+                    
+                    
+                    
+                    
+                    document.addEventListener("DOMContentLoaded", function () {
+                    console.log("✅ Barre de recherche activée...");
+                    
+                    const searchBar = document.getElementById("searchBar");
+                    const gallery = document.getElementById("gallery");
+                    
+                    if (!searchBar || !gallery) {
+                    console.error("❌ ERREUR: Élément introuvable !");
+                    return;
+                    }
+                    
+                    function filterImages() {
+                    console.log("🔎 Filtrage en cours...");
+                    const searchInput = document.getElementById("searchBar").value.toLowerCase().trim();
+                    const searchTerms = searchInput.split(" ").filter(Boolean); // Liste des mots-clés actifs
+                    
+                    const galleryItems = document.querySelectorAll(".gallery-offer");
+                    
+                    galleryItems.forEach(item => {
+                    const title = item.querySelector(".image-title") ? item.querySelector(".image-title").textContent.toLowerCase() : "";
+                    const description = item.querySelector(".image-description") ? item.querySelector(".image-description").textContent.toLowerCase() : "";
+                    const tags = Array.from(item.querySelectorAll(".tag")).map(tag => tag.textContent.toLowerCase());
+                    
+                    if (searchTerms.length === 0) {
+                       item.style.display = "block"; // ✅ Si aucune recherche active, on affiche tout
+                       return;
+                    }
+                    
+                    // ✅ Vérifie si TOUS les tags sélectionnés sont dans les tags de l'image
+                    const allTagsMatch = searchTerms.every(term => 
+                       title.includes(term) || 
+                       description.includes(term) || 
+                       tags.includes(term)
+                    );
+                    
+                    item.style.display = allTagsMatch ? "block" : "none"; // ✅ Affiche seulement si tous les tags sont présents
+                    });
+                    
+                    console.log("✅ Filtrage terminé !");
+                    }
+                    
+                    
+                    
+                    
+                    
+                    searchBar.addEventListener("input", filterImages);
+                    });
+         
+         
+         
+         //AJOUT DYNAMIQUE DES TAGS SOUS IMAGE PRINCIPAL
+                    document.addEventListener("DOMContentLoaded", function () {
+            // ✅ Sélection du conteneur des tags sous l'image principale
+            const mainTagsContainer = document.getElementById("main-image-tags");
+         
+            // ✅ Liste des tags injectés dynamiquement depuis le JSON
+            const mainImageTags = ["{TAGS}"]; // ⚠️ Assure-toi que cette variable est remplacée dynamiquement par ton script Python
+         
+            // ✅ Vérifie si des tags existent
+            if (mainTagsContainer && mainImageTags.length > 0 && mainImageTags[0] !== "{TAGS}") {
+                mainTagsContainer.innerHTML = ""; // Vide l'ancien contenu
+         
+                mainImageTags.forEach(tag => {
+                    const tagSpan = document.createElement("span");
+                    tagSpan.className = "tag non-clickable"; // ✅ Ajoute la classe pour désactiver les clics
+                    tagSpan.textContent = tag;
+                    mainTagsContainer.appendChild(tagSpan);
+                });
+            }
+         });
+         
+         
+         //MAIN POPUP TEST
+                    document.addEventListener("DOMContentLoaded", function () {
+            // ✅ Sélection des éléments du popup principal
+            const mainPopupOverlay = document.getElementById("popup-4k-main-overlay");
+            const mainPopup = document.getElementById("popup-4k-main");
+            const mainDownloadHDPopup = document.getElementById("popup-4k-main-hd-download");
+            const mainDownloadButton4K = document.getElementById("popup-4k-main-btn");
+         
+            // ✅ Récupération directe des URLs injectées via le template
+            const mainImageUrlHD = "{IMAGE_URL}"; // Injection directe de l'URL HD
+            const mainImageUrl4K = "{IMAGE_URL_4K}"; // Injection directe de l'URL 4K
+         
+            console.log("✅ Image principale détectée :", mainImageUrlHD, mainImageUrl4K);
+         
+            // ✅ Fonction pour ouvrir le popup principal
+            function openMainPopup4K() {
+                if (!mainImageUrlHD || !mainImageUrl4K) {
+                    console.warn("⚠️ Impossible d'ouvrir le popup, aucune image principale trouvée !");
+                    return;
+                }
+         
+                // ✅ Affichage du popup avec animation
+                mainPopupOverlay.style.display = "flex";
+                mainPopup.style.display = "flex";
+                setTimeout(() => {
+                    mainPopupOverlay.style.opacity = "1";
+                    mainPopup.style.opacity = "1";
+                    mainPopup.style.transform = "translate(-50%, -50%)";
+                }, 10);
+         
+                // ✅ Met à jour le bouton HD pour télécharger la bonne image
+                mainDownloadHDPopup.onclick = function (event) {
+                    event.preventDefault();
+                    forceDownload(mainImageUrlHD); // ✅ Télécharge bien la version HD principale
+                    closeMainPopup4K();
+                };
+         
+                // ✅ Téléchargement automatique de la 4K si l’email est soumis
+                if (hasSubmittedEmail()) {
+                    forceDownload(mainImageUrl4K);
+                }
+            }
+         
+            // ✅ Fonction pour fermer le popup principal
+            function closeMainPopup4K() {
+                mainPopup.style.opacity = "0";
+                mainPopup.style.transform = "translate(-50%, -55%)";
+                mainPopupOverlay.style.opacity = "0";
+         
+                setTimeout(() => {
+                    mainPopup.style.display = "none";
+                    mainPopupOverlay.style.display = "none";
+                }, 300);
+            }
+         
+            // ✅ Événement pour ouvrir le popup principal 4K
+            if (mainDownloadButton4K) {
+                mainDownloadButton4K.addEventListener("click", openMainPopup4K);
+            }
+         
+            // ✅ Fermer le popup principal en cliquant sur l’overlay
+            mainPopupOverlay.addEventListener("click", function (event) {
+                if (event.target === this) {
+                    closeMainPopup4K();
+                }
+            });
+         
+            // ✅ Capture la soumission du formulaire du popup principal
+            const mainPopupForm = document.getElementById("popup-4k-main-form");
+            if (mainPopupForm) {
+                mainPopupForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    setEmailSubmitted();
+                    closeMainPopup4K();
+                });
+            }
+         });
+         
+         // ✅ Fonction pour vérifier si l'utilisateur a déjà soumis son email
+         function hasSubmittedEmail() {
+            return localStorage.getItem("emailSubmitted") === "true";
+         }
+         
+         // ✅ Fonction pour enregistrer l'état après soumission du formulaire
+         function setEmailSubmitted() {
+            localStorage.setItem("emailSubmitted", "true");
+         }
+         
+         // ✅ Fonction pour télécharger une image
+         async function forceDownload(imageUrl) {
+            if (!imageUrl) {
+                console.warn("⚠️ L'URL de l'image n'est pas définie !");
+                return;
+            }
+            try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+         
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = "wallpaper.jpg";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+         
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(blobUrl);
+                }, 1000);
+            } catch (error) {
+                console.error("❌ Erreur lors du téléchargement de l’image :", error);
+            }
+         }
+         
+         
+         
+         
+         
+         
+            
+      </script>
+   </body>
 </html>
